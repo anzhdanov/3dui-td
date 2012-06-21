@@ -37,15 +37,17 @@ public abstract class ThreeDUIApplication {
 	private BackgroundObject backgroundObject;
 
 	protected TransformableObject pose0272; // pose receiver 1
-	protected TransformableObject pose0960; // pose receiver 2
+	protected TransformableObject pose0690; // pose receiver 2
 	protected TransformableObject pose1228; // pose receiver 3
-	protected TransformableObject pose1C44; // pose receiver 4
+	protected TransformableObject pose0B44; // pose receiver 4
 
 	private NotifyPoseReceiver poseReceiver;
 	private NotifyPoseReceiver poseReceiver2;
 	private NotifyPoseReceiver poseReceiver3;
 	private NotifyPoseReceiver poseReceiver4;
 	private ImageReceiver imageReceiver;
+	
+	protected ModelLoader modelLoader;
 	
 	public ThreeDUIApplication() {
 		this(null);
@@ -54,6 +56,7 @@ public abstract class ThreeDUIApplication {
 	public ThreeDUIApplication(String title) {
 		if (title != null) this.title = title;
 		ubitrackFacade = new UbitrackFacade();
+		modelLoader = new ModelLoader();
 	}
 
 	public void init() {
@@ -70,14 +73,14 @@ public abstract class ThreeDUIApplication {
 		pose0272 = new TransformableObject();
 		viewer.addObject(pose0272);
 		
-		pose0960 = new TransformableObject();
-		viewer.addObject(pose0960);
+		pose0690 = new TransformableObject();
+		viewer.addObject(pose0690);
 		
 		pose1228 = new TransformableObject();
 		viewer.addObject(pose1228);
 		
-		pose1C44 = new TransformableObject();
-		viewer.addObject(pose1C44);
+		pose0B44 = new TransformableObject();
+		viewer.addObject(pose0B44);
 
 		backgroundObject = new BackgroundObject();
 		viewer.addObject(backgroundObject);
@@ -90,7 +93,7 @@ public abstract class ThreeDUIApplication {
 		if (!ubitrackFacade.setPoseCallback("posesink", poseReceiver)) {
 			return;
 		}
-		poseReceiver2 = new NotifyPoseReceiver(this, this.pose0960);
+		poseReceiver2 = new NotifyPoseReceiver(this, this.pose0690);
 		if (!ubitrackFacade.setPoseCallback("posesink2", poseReceiver2)) {
 			return;
 		}
@@ -98,7 +101,7 @@ public abstract class ThreeDUIApplication {
 		if (!ubitrackFacade.setPoseCallback("posesink3", poseReceiver3)) {
 			return;
 		}
-		poseReceiver4 = new NotifyPoseReceiver(this, this.pose1C44);
+		poseReceiver4 = new NotifyPoseReceiver(this, this.pose0B44);
 		if (!ubitrackFacade.setPoseCallback("posesink4", poseReceiver4)) {
 			return;
 		}

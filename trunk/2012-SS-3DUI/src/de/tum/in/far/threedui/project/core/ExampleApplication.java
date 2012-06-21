@@ -4,6 +4,7 @@ import javax.media.j3d.Transform3D;
 import javax.vecmath.Vector3f;
 
 import de.tum.in.far.threedui.general.TransformableObject;
+import de.tum.in.far.threedui.project.core.ModelLoader.ModelFormat;
 import de.tum.in.far.threedui.project.objects.CoordSysObject;
 
 /**
@@ -30,8 +31,11 @@ public class ExampleApplication extends ThreeDUIApplication {
 	public void init() {
 		super.init();
 		
-		createCoordsOnMarkers();
+		// register all models we might need
+		this.modelLoader.registerModel("Sheep", "Sheep.wrl", ModelFormat.VRML97);
 		
+		createCoordsOnMarkers();
+		createSheepOnMarkers();
 	}
 
 	/**
@@ -44,9 +48,16 @@ public class ExampleApplication extends ThreeDUIApplication {
 		CoordSysObject coordSys4 = new CoordSysObject(0.001f, 0.05f);
 		
 		this.pose0272.getTransformGroup().addChild(coordSys1);
-		this.pose0960.getTransformGroup().addChild(coordSys2);
+		this.pose0690.getTransformGroup().addChild(coordSys2);
 		this.pose1228.getTransformGroup().addChild(coordSys3);
-		this.pose1C44.getTransformGroup().addChild(coordSys4);
+		this.pose0B44.getTransformGroup().addChild(coordSys4);
+	}
+	
+	private void createSheepOnMarkers() {
+		TransformableObject sheep1 = this.modelLoader.getModelObject("Sheep");
+		TransformableObject sheep2 = this.modelLoader.getModelObject("Sheep");
+		this.pose0272.getTransformGroup().addChild(sheep1);
+		this.pose1228.getTransformGroup().addChild(sheep2);
 	}
 
 	/**
