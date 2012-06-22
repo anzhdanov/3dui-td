@@ -55,9 +55,9 @@ public class TowerDefense extends ThreeDUIApplication {
 		CoordSysObject coordSys4 = new CoordSysObject(0.001f, 0.05f);
 		
 		this.pose0272.getTransformGroup().addChild(coordSys1);
-		this.pose0960.getTransformGroup().addChild(coordSys2);
+		this.pose0690.getTransformGroup().addChild(coordSys2);
 		this.pose1228.getTransformGroup().addChild(coordSys3);
-		this.pose1C44.getTransformGroup().addChild(coordSys4);
+		this.pose0B44.getTransformGroup().addChild(coordSys4);
 		
 	}
 
@@ -78,14 +78,14 @@ public class TowerDefense extends ThreeDUIApplication {
 			
 			System.out.println("Tracked Marker 0x0272. X: " + pos.x + ", Y: " + pos.y + ", Z: " + pos.z);
 		}
-		else if (pose.equals(this.pose0960)) {
+		else if (pose.equals(this.pose0690)) {
 			Transform3D trans = new Transform3D();
 			pose.getTransformGroup().getTransform(trans);
 			
 			Vector3f pos = new Vector3f();
 			trans.get(pos);
 			
-			System.out.println("Tracked Marker 0x0960. X: " + pos.x + ", Y: " + pos.y + ", Z: " + pos.z);
+			System.out.println("Tracked Marker 0x0690. X: " + pos.x + ", Y: " + pos.y + ", Z: " + pos.z);
 		}
 		else if (pose.equals(this.pose1228)) {
 			Transform3D trans = new Transform3D();
@@ -96,14 +96,14 @@ public class TowerDefense extends ThreeDUIApplication {
 			
 			System.out.println("Tracked Marker 0x1228. X: " + pos.x + ", Y: " + pos.y + ", Z: " + pos.z);
 		}
-		else if (pose.equals(this.pose1C44)) {
+		else if (pose.equals(this.pose0B44)) {
 			Transform3D trans = new Transform3D();
 			pose.getTransformGroup().getTransform(trans);
 			
 			Vector3f pos = new Vector3f();
 			trans.get(pos);
 			
-			System.out.println("Tracked Marker 0x1C44. X: " + pos.x + ", Y: " + pos.y + ", Z: " + pos.z);
+			System.out.println("Tracked Marker 0x0B44. X: " + pos.x + ", Y: " + pos.y + ", Z: " + pos.z);
 		}
 		
 	}
