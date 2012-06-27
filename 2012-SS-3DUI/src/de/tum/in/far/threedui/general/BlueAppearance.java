@@ -18,6 +18,7 @@ public class BlueAppearance extends Appearance {
 		//Switch on light
 		blueMat.setLightingEnable(true);
 		
+		
 		setMaterial(blueMat);
 	}
 }

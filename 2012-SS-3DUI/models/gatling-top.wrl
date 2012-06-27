@@ -1,0 +1,52 @@
+#VRML V2.0 utf8
+
+#Created by CINEMA 4D
+
+DEF W_rfel Transform {
+  translation 0.001088 0.013288 -0.000864
+  scale 1 1 1
+  children [ 
+    Shape {
+      appearance DEF MAT_Mat_2 Appearance {
+        material Material {
+          ambientIntensity 0.2
+          diffuseColor 0.01702 0.052275 0.248
+          specularColor 0.025 0.025 0.025
+          emissiveColor 0 0 0
+          shininess 0.025
+          transparency 0
+        }
+      }
+      geometry DEF FACESET_W_rfel IndexedFaceSet {
+        ccw FALSE
+        solid FALSE
+        creaseAngle 1.396263
+        coord Coordinate {
+          point [ -0.006726 -0.003704 -0.008119,-0.006726 0.003704 -0.008119,-0.006726 -0.003704 0.008119,-0.006726 0.003704 0.002936,0.006726 -0.003704 0.008119,
+            0.006726 0.003704 0.002936,0.006726 -0.003704 -0.008119,0.006726 0.003704 -0.008119
+          ]
+        }
+        texCoord TextureCoordinate {
+          point [ 0 1,1 0,
+            0 0,0 0,1 1,0 1,1 1,
+            0 0,1 0,1 0,0 1,1 1,
+            1 0,0 0,1 1,0 1,0 0,
+            1 0,0 1,1 1
+          ]
+        }
+        coordIndex [ 0,1,3,2,-1,2,3,5,4,-1,4,5,7,6,-1,
+          6,7,1,0,-1,1,7,5,3,-1,6,0,2,4,-1
+        ]
+        texCoordIndex [ 2,5,11,8,-1,7,10,14,12,-1,13,15,19,17,-1,
+          16,18,4,1,-1,3,18,14,9,-1,16,0,6,12,-1
+        ]
+      }
+    }
+  ]
+}
+DEF Timer TimeSensor {
+  startTime 0
+  stopTime 0
+  cycleInterval 4
+  loop TRUE
+}
