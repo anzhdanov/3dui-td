@@ -42,7 +42,7 @@ public class TowerDefense extends ThreeDUIApplication {
 	}
 	
 	public TowerDefense() {
-		super("Example Application");
+		super("3D UI Tower Defense");
 	}
 	
 	/**
@@ -76,16 +76,16 @@ public class TowerDefense extends ThreeDUIApplication {
 			this.modelLoader.registerModel("Howitzer-Base", "howitzer-base.wrl", ModelFormat.VRML97);
 			this.modelLoader.registerModel("Howitzer-Barrel", "howitzer-barrel.wrl", ModelFormat.VRML97);
 		
+			
+			
 		Appearance app = new BlueAppearance();
 		TransparencyAttributes ta = new TransparencyAttributes();
 		ta.setTransparency(0.5f);
 		ta.setTransparencyMode (ta.BLENDED);
-		app.setTransparencyAttributes(ta);
-		
-		
+		app.setTransparencyAttributes(ta);		
 		PathObject pathObject = new PathObject(app);
-		this.pose0272.getTransformGroup().addChild(pathObject);
 		
+		this.pose0272.getTransformGroup().addChild(pathObject);
 		
 		
 		
@@ -114,10 +114,10 @@ public class TowerDefense extends ThreeDUIApplication {
 
 	private void createTowersOnMarkers() {
 		
-		CannonTower c = new CannonTower(CannonTower.TYPE_PRECISION);
-		CannonTower c1 = new CannonTower(CannonTower.TYPE_GUN);
-		CannonTower c3 = new CannonTower(CannonTower.TYPE_DOUBLEGUN);
-		CannonTower c4 = new CannonTower(CannonTower.TYPE_GATLING);
+		CannonTower c = new CannonTower(CannonTower.Type.PRECISION);
+		CannonTower c1 = new CannonTower(CannonTower.Type.GUN);
+		CannonTower c3 = new CannonTower(CannonTower.Type.DOUBLEGUN);
+		CannonTower c4 = new CannonTower(CannonTower.Type.GATLING);
 		
 		this.pose0690.getTransformGroup().addChild(c);
 		this.pose0B44.getTransformGroup().addChild(c1);
