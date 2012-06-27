@@ -167,7 +167,10 @@ public class PathObject extends TransformableObject {
 	
 	
 	
-	
+	/***
+	 * Extract the waypoints from the map
+	 * @return Array of Waypoints
+	 */
 	public Point3f[] getWayPoints()
 	{
 		LinkedList<Point3f> wayPoints = new LinkedList<Point3f>();
