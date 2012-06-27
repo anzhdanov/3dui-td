@@ -56,7 +56,7 @@ public abstract class ThreeDUIApplication {
 	public ThreeDUIApplication(String title) {
 		if (title != null) this.title = title;
 		ubitrackFacade = new UbitrackFacade();
-		modelLoader = new ModelLoader();
+		modelLoader = ModelLoader.getInstance();
 	}
 
 	public void init() {

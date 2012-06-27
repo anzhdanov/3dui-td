@@ -24,9 +24,13 @@ import de.tum.in.far.threedui.general.ModelObject;
  */
 public class ModelLoader {
 	
+	private static ModelLoader instance = null;
+	
 	public enum ModelFormat {
 		VRML97;
 	}
+
+	
 	
 	private class Model {
 		public String id;
@@ -61,11 +65,30 @@ public class ModelLoader {
 	
 	
 	
-	private HashMap<String, Model> models;
+	private static HashMap<String, Model> models;
 	
-	public ModelLoader() {
-		this.models = new HashMap<String, Model>();
+	/**
+	 * Model Loader Constructor
+	 */
+	private ModelLoader() {
+
 	}
+	
+	/**
+	 * Singleton 
+	 * @return the current instance of the Modelloader
+	 */
+	public static ModelLoader getInstance()
+	{
+		if(instance == null)
+		{
+			instance = new ModelLoader();
+			models = new HashMap<String, Model>();
+		}
+		return instance;
+	}
+	
+
 	
 	/**
 	 * Register a Model for later usage in the application (typically called from init).
