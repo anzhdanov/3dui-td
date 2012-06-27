@@ -30,13 +30,16 @@ public class CannonTower extends TransformableObject{
 	private TransformGroup turretRotGroup;
 	private TransformGroup barrelRotGroup;
 	
-	public static int TYPE_GUN = 0;
-	public static int TYPE_DOUBLEGUN = 1;
-	public static int TYPE_PRECISION = 2;
-	public static int TYPE_GATLING = 3;
-	public static int TYPE_HOWITZER = 4;
+	public static enum Type
+	{
+		GUN,
+		DOUBLEGUN,
+		PRECISION,
+		GATLING,
+		HOWITZER
+	}
 	
-	public CannonTower(int type)
+	public CannonTower(Type type)
 	{
 		TransformableObject cannonTop = null;
 		TransformableObject cannonBase = null;
@@ -45,7 +48,7 @@ public class CannonTower extends TransformableObject{
 		this.bGroup = new BranchGroup();
 		this.loader = ModelLoader.getInstance();
 		
-		if(type == TYPE_GUN)
+		if(type == Type.GUN)
 		{
 			cannonTop = this.loader.getModelObject("Gun-Top");
 			cannonBase = this.loader.getModelObject("Gun-Base");
@@ -53,28 +56,28 @@ public class CannonTower extends TransformableObject{
 			
 			barrelYOffset = 0.02f;
 		}
-		else if(type == TYPE_DOUBLEGUN)
+		else if(type == Type.DOUBLEGUN)
 		{
 			cannonTop = this.loader.getModelObject("DoubleGun-Top");
 			cannonBase = this.loader.getModelObject("DoubleGun-Base");
 			cannonBarrel = this.loader.getModelObject("DoubleGun-Barrel");
 			barrelYOffset = 0.016f;
 		}
-		else if(type == TYPE_PRECISION)
+		else if(type == Type.PRECISION)
 		{
 			cannonTop = this.loader.getModelObject("Precision-Top");
 			cannonBase = this.loader.getModelObject("Precision-Base");
 			cannonBarrel = this.loader.getModelObject("Precision-Barrel");
 			barrelYOffset = 0.02f;
 		}
-		else if(type == TYPE_GATLING)
+		else if(type == Type.GATLING)
 		{
 			cannonTop = this.loader.getModelObject("Gatling-Top");
 			cannonBase = this.loader.getModelObject("Gatling-Base");
 			cannonBarrel = this.loader.getModelObject("Gatling-Barrel");
 			barrelYOffset = 0.013f;
 		}
-		else if(type == TYPE_HOWITZER)
+		else if(type == Type.HOWITZER)
 		{
 			cannonTop = this.loader.getModelObject("Howitzer-Top");
 			cannonBase = this.loader.getModelObject("Howitzer-Base");
