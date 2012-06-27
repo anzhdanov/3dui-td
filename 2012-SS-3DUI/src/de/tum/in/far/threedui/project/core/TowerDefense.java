@@ -53,11 +53,28 @@ public class TowerDefense extends ThreeDUIApplication {
 	public void init() {
 		super.init();
 		
-		// register all models we might need
-		this.modelLoader.registerModel("Turret", "turret.wrl", ModelFormat.VRML97);
+	this.modelLoader = ModelLoader.getInstance();
+		
 
-		this.modelLoader.registerModel("CannonTop", "cannon-top.wrl", ModelFormat.VRML97);
-		this.modelLoader.registerModel("CannonBase", "cannon-base.wrl", ModelFormat.VRML97);
+			this.modelLoader.registerModel("Gun-Top", "gun-top.wrl", ModelFormat.VRML97);
+			this.modelLoader.registerModel("Gun-Base", "gun-base.wrl", ModelFormat.VRML97);
+			this.modelLoader.registerModel("Gun-Barrel", "gun-barrel.wrl", ModelFormat.VRML97);
+	
+			this.modelLoader.registerModel("DoubleGun-Top", "doublegun-top.wrl", ModelFormat.VRML97);
+			this.modelLoader.registerModel("DoubleGun-Base", "doublegun-base.wrl", ModelFormat.VRML97);
+			this.modelLoader.registerModel("DoubleGun-Barrel", "doublegun-barrel.wrl", ModelFormat.VRML97);
+		
+			this.modelLoader.registerModel("Precision-Top", "precision-top.wrl", ModelFormat.VRML97);
+			this.modelLoader.registerModel("Precision-Base", "precision-base.wrl", ModelFormat.VRML97);
+			this.modelLoader.registerModel("Precision-Barrel", "precision-barrel.wrl", ModelFormat.VRML97);
+		
+			this.modelLoader.registerModel("Gatling-Top", "gatling-top.wrl", ModelFormat.VRML97);
+			this.modelLoader.registerModel("Gatling-Base", "gatling-base.wrl", ModelFormat.VRML97);
+			this.modelLoader.registerModel("Gatling-Barrel", "gatling-barrel.wrl", ModelFormat.VRML97);
+			
+			this.modelLoader.registerModel("Howitzer-Top", "howitzer-top.wrl", ModelFormat.VRML97);
+			this.modelLoader.registerModel("Howitzer-Base", "howitzer-base.wrl", ModelFormat.VRML97);
+			this.modelLoader.registerModel("Howitzer-Barrel", "howitzer-barrel.wrl", ModelFormat.VRML97);
 		
 		Appearance app = new BlueAppearance();
 		TransparencyAttributes ta = new TransparencyAttributes();

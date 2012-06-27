@@ -38,52 +38,50 @@ public class CannonTower extends TransformableObject{
 	
 	public CannonTower(int type)
 	{
-		
+		TransformableObject cannonTop = null;
+		TransformableObject cannonBase = null;
+		TransformableObject cannonBarrel = null;
 		
 		this.bGroup = new BranchGroup();
-		this.loader = new ModelLoader();
+		this.loader = ModelLoader.getInstance();
 		
 		if(type == TYPE_GUN)
 		{
-			this.loader.registerModel("GunTop", "gun-top.wrl", ModelFormat.VRML97);
-			this.loader.registerModel("GunBase", "gun-base.wrl", ModelFormat.VRML97);
-			this.loader.registerModel("GunBarrel", "gun-barrel.wrl", ModelFormat.VRML97);
+			cannonTop = this.loader.getModelObject("Gun-Top");
+			cannonBase = this.loader.getModelObject("Gun-Base");
+			cannonBarrel = this.loader.getModelObject("Gun-Barrel");
+			
 			barrelYOffset = 0.02f;
 		}
 		else if(type == TYPE_DOUBLEGUN)
 		{
-			this.loader.registerModel("GunTop", "doublegun-top.wrl", ModelFormat.VRML97);
-			this.loader.registerModel("GunBase", "doublegun-base.wrl", ModelFormat.VRML97);
-			this.loader.registerModel("GunBarrel", "doublegun-barrel.wrl", ModelFormat.VRML97);
+			cannonTop = this.loader.getModelObject("DoubleGun-Top");
+			cannonBase = this.loader.getModelObject("DoubleGun-Base");
+			cannonBarrel = this.loader.getModelObject("DoubleGun-Barrel");
 			barrelYOffset = 0.016f;
 		}
 		else if(type == TYPE_PRECISION)
 		{
-			this.loader.registerModel("GunTop", "precision-top.wrl", ModelFormat.VRML97);
-			this.loader.registerModel("GunBase", "precision-base.wrl", ModelFormat.VRML97);
-			this.loader.registerModel("GunBarrel", "precision-barrel.wrl", ModelFormat.VRML97);
+			cannonTop = this.loader.getModelObject("Precision-Top");
+			cannonBase = this.loader.getModelObject("Precision-Base");
+			cannonBarrel = this.loader.getModelObject("Precision-Barrel");
 			barrelYOffset = 0.02f;
 		}
 		else if(type == TYPE_GATLING)
 		{
-			this.loader.registerModel("GunTop", "gatling-top.wrl", ModelFormat.VRML97);
-			this.loader.registerModel("GunBase", "gatling-base.wrl", ModelFormat.VRML97);
-			this.loader.registerModel("GunBarrel", "gatling-barrel.wrl", ModelFormat.VRML97);
+			cannonTop = this.loader.getModelObject("Gatling-Top");
+			cannonBase = this.loader.getModelObject("Gatling-Base");
+			cannonBarrel = this.loader.getModelObject("Gatling-Barrel");
 			barrelYOffset = 0.013f;
 		}
 		else if(type == TYPE_HOWITZER)
 		{
-			this.loader.registerModel("GunTop", "howitzer-top.wrl", ModelFormat.VRML97);
-			this.loader.registerModel("GunBase", "howitzer-base.wrl", ModelFormat.VRML97);
-			this.loader.registerModel("GunBarrel", "howitzer-barrel.wrl", ModelFormat.VRML97);
+			cannonTop = this.loader.getModelObject("Howitzer-Top");
+			cannonBase = this.loader.getModelObject("Howitzer-Base");
+			cannonBarrel = this.loader.getModelObject("Howitzer-Barrel");
 			barrelYOffset = 0.013f;
 		}
 		
-		
-		
-		TransformableObject cannonTop = this.loader.getModelObject("GunTop");
-		TransformableObject cannonBase = this.loader.getModelObject("GunBase");
-		TransformableObject cannonBarrel = this.loader.getModelObject("GunBarrel");
 		
 		Transform3D rotate = new Transform3D();
 		rotate.rotX(Math.PI/2);
