@@ -1,0 +1,23 @@
+sink-id      pattern
+
+(from marker.pdf)
+posesink     0x0272
+posesink2    0x0690
+posesink3    0x1228
+posesink4    0x0B44
+posesink5    0x1C44
+posesink6    0x005A
+
+(new ones)
+posesink7    0x0065
+posesink8    0x0095
+posesink9    0x003C
+posesink10   0x0056
+posesink11   0x00C2
+posesink12   0x00B0
+
+
+Instructions: Print 12markers.png with printing options set to:
+width = 230 mm
+height = 184 mm
+no fit to page size / similar options

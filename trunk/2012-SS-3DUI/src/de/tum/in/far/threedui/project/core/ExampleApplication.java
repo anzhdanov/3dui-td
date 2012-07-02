@@ -42,15 +42,18 @@ public class ExampleApplication extends ThreeDUIApplication {
 	 * Example code: Display coordinate systems on all markers
 	 */
 	private void createCoordsOnMarkers() {
-		CoordSysObject coordSys1 = new CoordSysObject(0.001f, 0.05f);
-		CoordSysObject coordSys2 = new CoordSysObject(0.001f, 0.05f);
-		CoordSysObject coordSys3 = new CoordSysObject(0.001f, 0.05f);
-		CoordSysObject coordSys4 = new CoordSysObject(0.001f, 0.05f);
-		
-		this.pose0272.getTransformGroup().addChild(coordSys1);
-		this.pose0690.getTransformGroup().addChild(coordSys2);
-		this.pose1228.getTransformGroup().addChild(coordSys3);
-		this.pose0B44.getTransformGroup().addChild(coordSys4);
+		this.pose0272.getTransformGroup().addChild(new CoordSysObject(0.001f, 0.05f));
+		this.pose0690.getTransformGroup().addChild(new CoordSysObject(0.001f, 0.05f));
+		this.pose1228.getTransformGroup().addChild(new CoordSysObject(0.001f, 0.05f));
+		this.pose0B44.getTransformGroup().addChild(new CoordSysObject(0.001f, 0.05f));
+		this.pose1C44.getTransformGroup().addChild(new CoordSysObject(0.001f, 0.05f));
+		this.pose005A.getTransformGroup().addChild(new CoordSysObject(0.001f, 0.05f));
+		this.pose0065.getTransformGroup().addChild(new CoordSysObject(0.001f, 0.05f));
+		this.pose0095.getTransformGroup().addChild(new CoordSysObject(0.001f, 0.05f));
+		this.pose003C.getTransformGroup().addChild(new CoordSysObject(0.001f, 0.05f));
+		this.pose0056.getTransformGroup().addChild(new CoordSysObject(0.001f, 0.05f));
+		this.pose00C2.getTransformGroup().addChild(new CoordSysObject(0.001f, 0.05f));
+		this.pose00B0.getTransformGroup().addChild(new CoordSysObject(0.001f, 0.05f));
 	}
 	
 	private void createSheepOnMarkers() {

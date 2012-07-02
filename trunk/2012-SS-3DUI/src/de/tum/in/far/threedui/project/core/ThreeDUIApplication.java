@@ -40,11 +40,27 @@ public abstract class ThreeDUIApplication {
 	protected TransformableObject pose0690; // pose receiver 2
 	protected TransformableObject pose1228; // pose receiver 3
 	protected TransformableObject pose0B44; // pose receiver 4
+	protected TransformableObject pose1C44; // pose receiver 5
+	protected TransformableObject pose005A; // pose receiver 6
+	protected TransformableObject pose0065; // pose receiver 7
+	protected TransformableObject pose0095; // pose receiver 8
+	protected TransformableObject pose003C; // pose receiver 9
+	protected TransformableObject pose0056; // pose receiver 10
+	protected TransformableObject pose00C2; // pose receiver 11
+	protected TransformableObject pose00B0; // pose receiver 12
 
 	private NotifyPoseReceiver poseReceiver;
 	private NotifyPoseReceiver poseReceiver2;
 	private NotifyPoseReceiver poseReceiver3;
 	private NotifyPoseReceiver poseReceiver4;
+	private NotifyPoseReceiver poseReceiver5;
+	private NotifyPoseReceiver poseReceiver6;
+	private NotifyPoseReceiver poseReceiver7;
+	private NotifyPoseReceiver poseReceiver8;
+	private NotifyPoseReceiver poseReceiver9;
+	private NotifyPoseReceiver poseReceiver10;
+	private NotifyPoseReceiver poseReceiver11;
+	private NotifyPoseReceiver poseReceiver12;
 	private ImageReceiver imageReceiver;
 	
 	protected ModelLoader modelLoader;
@@ -82,6 +98,30 @@ public abstract class ThreeDUIApplication {
 		pose0B44 = new TransformableObject();
 		viewer.addObject(pose0B44);
 
+		pose1C44 = new TransformableObject();
+		viewer.addObject(pose1C44);
+
+		pose005A = new TransformableObject();
+		viewer.addObject(pose005A);
+
+		pose0065 = new TransformableObject();
+		viewer.addObject(pose0065);
+		
+		pose0095 = new TransformableObject();
+		viewer.addObject(pose0095);
+		
+		pose003C = new TransformableObject();
+		viewer.addObject(pose003C);
+		
+		pose0056 = new TransformableObject();
+		viewer.addObject(pose0056);
+
+		pose00C2 = new TransformableObject();
+		viewer.addObject(pose00C2);
+
+		pose00B0 = new TransformableObject();
+		viewer.addObject(pose00B0);
+
 		backgroundObject = new BackgroundObject();
 		viewer.addObject(backgroundObject);
 	}
@@ -103,6 +143,38 @@ public abstract class ThreeDUIApplication {
 		}
 		poseReceiver4 = new NotifyPoseReceiver(this, this.pose0B44);
 		if (!ubitrackFacade.setPoseCallback("posesink4", poseReceiver4)) {
+			return;
+		}
+		poseReceiver5 = new NotifyPoseReceiver(this, this.pose1C44);
+		if (!ubitrackFacade.setPoseCallback("posesink5", poseReceiver5)) {
+			return;
+		}
+		poseReceiver6 = new NotifyPoseReceiver(this, this.pose005A);
+		if (!ubitrackFacade.setPoseCallback("posesink6", poseReceiver6)) {
+			return;
+		}
+		poseReceiver7 = new NotifyPoseReceiver(this, this.pose0065);
+		if (!ubitrackFacade.setPoseCallback("posesink7", poseReceiver7)) {
+			return;
+		}
+		poseReceiver8 = new NotifyPoseReceiver(this, this.pose0095);
+		if (!ubitrackFacade.setPoseCallback("posesink8", poseReceiver8)) {
+			return;
+		}
+		poseReceiver9 = new NotifyPoseReceiver(this, this.pose003C);
+		if (!ubitrackFacade.setPoseCallback("posesink9", poseReceiver9)) {
+			return;
+		}
+		poseReceiver10 = new NotifyPoseReceiver(this, this.pose0056);
+		if (!ubitrackFacade.setPoseCallback("posesink10", poseReceiver10)) {
+			return;
+		}
+		poseReceiver11 = new NotifyPoseReceiver(this, this.pose00C2);
+		if (!ubitrackFacade.setPoseCallback("posesink11", poseReceiver11)) {
+			return;
+		}
+		poseReceiver12 = new NotifyPoseReceiver(this, this.pose00B0);
+		if (!ubitrackFacade.setPoseCallback("posesink12", poseReceiver12)) {
 			return;
 		}
 
