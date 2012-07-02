@@ -17,6 +17,7 @@ import javax.vecmath.Vector3d;
 import javax.vecmath.Vector3f;
 
 import com.sun.j3d.utils.geometry.*;
+import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 
 import de.tum.in.far.threedui.ex1.SphereObject;
 import de.tum.in.far.threedui.general.BlueAppearance;
@@ -31,7 +32,8 @@ public class PathObject extends TransformableObject {
 	//Internal map
 	private int xres= 10;
 	private int yres= 12;
-	Enemy e;
+	
+	public LinkedList<Enemy> enemyList = new LinkedList<Enemy>();
 	
 	private float tileWidth = 0.025f;
 	
@@ -104,23 +106,27 @@ public class PathObject extends TransformableObject {
 		
 		Point3f a[] = this.getWayPoints();
 
-		Enemy e1 = new Enemy(new RedAppearance());
-		e1.speed = 7000;
-		AnimationPosition anim = new AnimationPosition(e1);
-		anim.setPositions(this.getWayPoints());
-		tPath.addChild(anim);
+		Enemy e1 = new Enemy(new RedAppearance(),7000);
+		enemyList.add(e1);
+		//AnimationPosition anim = new AnimationPosition(e1);
+		e1.setPath(this.getWayPoints());
+		tPath.addChild(e1.animation);
 		
-		Enemy e2 = new Enemy(new BlueAppearance());
-		e2.speed = 15000;
-		AnimationPosition anim2 = new AnimationPosition(e2);
-		anim2.setPositions(this.getWayPoints());
-		tPath.addChild(anim2);
 		
-		Enemy e3 = new Enemy(new GreenAppearance());
-		e3.speed = 20000;
-		AnimationPosition anim3 = new AnimationPosition(e3);
-		anim3.setPositions(this.getWayPoints());
-		tPath.addChild(anim3);
+		Enemy e2 = new Enemy(new BlueAppearance(),15000);
+
+		enemyList.add(e2);
+		//AnimationPosition anim2 = new AnimationPosition(e2);
+		e2.setPath(this.getWayPoints());
+		tPath.addChild(e2.animation);
+		
+		Enemy e3 = new Enemy(new GreenAppearance(),20000);
+
+		enemyList.add(e3);
+		//AnimationPosition anim3 = new AnimationPosition(e3);
+		e3.setPath(this.getWayPoints());
+		tPath.addChild(e3.animation);
+		
 		
 		markerGroup.addChild(tPath);
 	
