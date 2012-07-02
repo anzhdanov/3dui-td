@@ -36,10 +36,10 @@ public abstract class ThreeDUIApplication {
 	
 	private BackgroundObject backgroundObject;
 
-	protected TransformableObject pose0272; // pose receiver 1
-	protected TransformableObject pose0690; // pose receiver 2
-	protected TransformableObject pose1228; // pose receiver 3
-	protected TransformableObject pose0B44; // pose receiver 4
+	public TransformableObject pose0272; // pose receiver 1
+	public TransformableObject pose0690; // pose receiver 2
+	public  TransformableObject pose1228; // pose receiver 3
+	public TransformableObject pose0B44; // pose receiver 4
 	protected TransformableObject pose1C44; // pose receiver 5
 	protected TransformableObject pose005A; // pose receiver 6
 	protected TransformableObject pose0065; // pose receiver 7

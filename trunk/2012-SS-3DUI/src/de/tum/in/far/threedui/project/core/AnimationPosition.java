@@ -95,4 +95,13 @@ public class AnimationPosition extends BranchGroup {
 		addChild(positionInterpolator);
 	
 	}
+	
+	
+	public Transform3D getCurrentTransformation()
+	{
+		Transform3D t = new Transform3D();
+		this.targetTransformGroup.getTransform(t);
+		return t;
+	}
+	
 }

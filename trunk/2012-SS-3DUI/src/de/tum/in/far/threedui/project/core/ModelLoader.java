@@ -104,6 +104,19 @@ public class ModelLoader {
 		models.put(id, model);
 	}
 	
+	
+	/**
+	 * Register a Model for later usage in the application (typically called from init).
+	 * 
+	 * @param id The id the model will be referenced with
+	 * @param filename The filename of the model file (with extension)
+	 * 
+	 * @TODO support more formats, if required
+	 */
+	public void registerModel(String id, String filename) {
+		registerModel(id, filename,ModelFormat.VRML97);
+	}
+	
 	/**
 	 * Creates and returns a new instance of a model you specify.
 	 * The model must have been registered before, else it returns null.

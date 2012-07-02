@@ -35,10 +35,22 @@ import java.util.*;
  * viewer as well as poseXXXX are visible, so you can attach stuff to them.
  */
 public class TowerDefense extends ThreeDUIApplication {
-
+	private static TowerDefense app;
+	
+	public PathObject pathObject;
+	
 	public static void main(String[] args) {
-		TowerDefense app = new TowerDefense();
+		app = new TowerDefense();
 		app.init();
+	}
+	
+	/**
+	 * Get the current Instance of the app (good for testing purposes9
+	 * @return
+	 */
+	public static TowerDefense getAppInstance()
+	{
+		return app;
 	}
 	
 	public TowerDefense() {
@@ -75,7 +87,9 @@ public class TowerDefense extends ThreeDUIApplication {
 			this.modelLoader.registerModel("Howitzer-Top", "howitzer-top.wrl", ModelFormat.VRML97);
 			this.modelLoader.registerModel("Howitzer-Base", "howitzer-base.wrl", ModelFormat.VRML97);
 			this.modelLoader.registerModel("Howitzer-Barrel", "howitzer-barrel.wrl", ModelFormat.VRML97);
-		
+			
+			
+			
 			
 			
 		Appearance app = new BlueAppearance();
@@ -83,7 +97,7 @@ public class TowerDefense extends ThreeDUIApplication {
 		ta.setTransparency(0.5f);
 		ta.setTransparencyMode (ta.BLENDED);
 		app.setTransparencyAttributes(ta);		
-		PathObject pathObject = new PathObject(app);
+		pathObject = new PathObject(app);
 		
 		this.pose0272.getTransformGroup().addChild(pathObject);
 		
@@ -122,7 +136,7 @@ public class TowerDefense extends ThreeDUIApplication {
 		this.pose0690.getTransformGroup().addChild(c);
 		this.pose0B44.getTransformGroup().addChild(c1);
 		this.pose1228.getTransformGroup().addChild(c3);
-		this.pose0272.getTransformGroup().addChild(c4);
+		//this.pose0272.getTransformGroup().addChild(c4);
 		
 	}
 	

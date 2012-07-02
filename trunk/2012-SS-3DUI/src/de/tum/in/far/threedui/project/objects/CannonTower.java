@@ -1,5 +1,6 @@
 package de.tum.in.far.threedui.project.objects;
 
+import java.awt.Point;
 import java.util.Enumeration;
 
 import javax.media.j3d.Behavior;
@@ -11,6 +12,7 @@ import javax.media.j3d.WakeupCondition;
 import javax.media.j3d.WakeupCriterion;
 import javax.media.j3d.WakeupOnElapsedTime;
 import javax.media.j3d.WakeupOr;
+import javax.vecmath.Point3f;
 import javax.vecmath.Vector3d;
 import javax.vecmath.Vector3f;
 
@@ -26,6 +28,7 @@ public class CannonTower extends TransformableObject{
 	private Transform3D barrelElevation;
 	private CannonTowerController controller;
 	private float barrelYOffset = 0.02f;
+	private Type towerType;
 	
 	private TransformGroup turretRotGroup;
 	private TransformGroup barrelRotGroup;
@@ -39,8 +42,31 @@ public class CannonTower extends TransformableObject{
 		HOWITZER
 	}
 	
+	public static Type getTypeByID(int id)
+	{
+		switch(id)
+		{
+		case 0:
+			return Type.GUN;
+		case 1:
+			return Type.DOUBLEGUN;
+		case 2:
+			return Type.PRECISION;
+		case 3:
+			return Type.GATLING;
+		case 4:
+			return Type.HOWITZER;
+		default:
+		return Type.GUN;
+				
+		}
+	}
+	
 	public CannonTower(Type type)
 	{
+		this.towerType = type;
+		this.setCapability(BranchGroup.ALLOW_DETACH);
+		
 		TransformableObject cannonTop = null;
 		TransformableObject cannonBase = null;
 		TransformableObject cannonBarrel = null;
@@ -93,7 +119,7 @@ public class CannonTower extends TransformableObject{
 		rotateUpRight.addChild(cannonBase);
 		
 		turretRotation = new Transform3D();
-		turretRotation.rotY(2.0f);
+		turretRotation.rotY(0.0f);
 		turretRotGroup = new TransformGroup(turretRotation);
 		turretRotGroup.addChild(cannonTop);
 		turretRotGroup.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
@@ -122,28 +148,6 @@ public class CannonTower extends TransformableObject{
 		
 		bGroup.addChild(rotateUpRight);
 		
-		/*
-		
-		Transform3D translate = new Transform3D();
-		translate.setTranslation(new Vector3d(0,0.015f,0));
-		TransformGroup objTransGroup = new TransformGroup(translate);
-		
-		
-		turretRotation = new Transform3D();
-		turretRotation.rotY(2.0f);
-		turretRotGroup = new TransformGroup(turretRotation);
-		turretRotGroup.addChild(cannonTop);
-		turretRotGroup.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
-		
-		objTransGroup.addChild(turretRotGroup);
-	
-		TransformGroup objRotGroup = new TransformGroup(rotate);
-		objRotGroup.addChild(cannonBase);
-		objRotGroup.addChild(objTransGroup);
-	
-		
-		this.bGroup.addChild(objRotGroup);
-			*/
 		
 		controller = new CannonTowerController(this);
 		
@@ -152,12 +156,62 @@ public class CannonTower extends TransformableObject{
 		
 	}
 	
-
-
 	public BranchGroup getGroup()
 	{
 		return this.bGroup;
 	}
+	
+	/***
+	 * Expects the target as World Coordinates
+	 * Right now it's simplified since I assume that the markers will sit almost parallel on one plane
+	 */
+	public void aimAtPoint(Point3f aimPoint)
+	{
+		
+		Transform3D t3d = new Transform3D();
+		Point3f position = new Point3f();
+		bGroup.getLocalToVworld(t3d);
+		
+		
+		t3d.invert(); //Get the World to Local Matrix
+		t3d.transform(aimPoint); //AImpoint is now in local coordinate system
+		
+		
+		//System.out.println("AimPoint "+ aimPoint);
+		
+		Vector3f dirVector = new Vector3f(aimPoint);
+		dirVector.sub(position);
+		dirVector.normalize(); //Now we've got the normalized direction
+		
+		//System.out.println("direction "+dirVector);
+		
+
+		Vector3f dir2 = new Vector3f();
+		dir2.x = dirVector.x;
+		dir2.y = dirVector.y;
+		dir2.z = 0;
+		
+
+		float angle_elev = dir2.angle(dirVector);
+		
+		Vector3f current = new Vector3f(0.0f,-1.0f,0.0f);
+
+		float angle_rot = current.angle(dirVector);
+		//System.out.println("Angle: "+angle_rot);
+
+		if(Float.isNaN(angle_rot)) angle_rot = 0;
+		if(Float.isNaN(angle_elev)) angle_elev = 0;
+		
+		if(aimPoint.x<0) angle_rot *= -1;
+		if(aimPoint.z>position.z) angle_elev *= -1;
+		
+		setTurretAngle(angle_rot);
+		setBarrelElevation(angle_elev);
+		
+		
+	}
+
+
 	
 	public void setTurretAngle(float angle)
 	{
@@ -175,6 +229,9 @@ public class CannonTower extends TransformableObject{
 		barrelRotGroup.setTransform(barrelTranslation);
 	}
 
-
+	public Type getType()
+	{
+		return this.towerType;
+	}
 
 }
