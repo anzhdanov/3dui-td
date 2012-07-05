@@ -97,11 +97,11 @@ public class AnimationPosition extends BranchGroup {
 	}
 	
 	
-	public Transform3D getCurrentTransformation()
+	public TransformGroup getCurrentTransformation()
 	{
-		Transform3D t = new Transform3D();
-		this.targetTransformGroup.getTransform(t);
-		return t;
+		
+		return targetTransformGroup;
+
 	}
 	
 }
