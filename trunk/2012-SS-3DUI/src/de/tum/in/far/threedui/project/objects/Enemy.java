@@ -24,9 +24,8 @@ import de.tum.in.far.threedui.general.RedAppearance;
 import de.tum.in.far.threedui.general.TransformableObject;
 import de.tum.in.far.threedui.project.core.AnimationPosition;
 
-public class Enemy extends BranchGroup {
+public class Enemy extends TransformableObject {
 
-	private TransformGroup transGroup;
 	public float speed = 10000;
 	
 	public AnimationPosition animation;
@@ -34,12 +33,7 @@ public class Enemy extends BranchGroup {
 	
 	public Enemy(Appearance app, float speed) {
 		
-		transGroup = new TransformGroup();
-		transGroup.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
-		transGroup.setCapability(TransformGroup.ALLOW_CHILDREN_EXTEND);
-		transGroup.setCapability(TransformGroup.ALLOW_CHILDREN_WRITE);
-		addChild(transGroup);
-		
+				
 		this.speed = speed;
 	
 		Sphere s = new Sphere(0.01f,app);
@@ -49,10 +43,6 @@ public class Enemy extends BranchGroup {
 		
 		
 		
-	}
-	
-	public TransformGroup getTransformGroup() {
-		return transGroup;
 	}
 	
 	public void setPath(Point3f[] posList)

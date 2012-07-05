@@ -33,7 +33,6 @@ public class PathObject extends TransformableObject {
 	private int xres= 10;
 	private int yres= 12;
 	
-	public LinkedList<Enemy> enemyList = new LinkedList<Enemy>();
 	
 	private float tileWidth = 0.025f;
 	
@@ -107,7 +106,9 @@ public class PathObject extends TransformableObject {
 		Point3f a[] = this.getWayPoints();
 
 		Enemy e1 = new Enemy(new RedAppearance(),7000);
-		enemyList.add(e1);
+		
+		GameController.getInstance().enemyList.add(e1);
+	
 		//AnimationPosition anim = new AnimationPosition(e1);
 		e1.setPath(this.getWayPoints());
 		tPath.addChild(e1.animation);
@@ -115,14 +116,14 @@ public class PathObject extends TransformableObject {
 		
 		Enemy e2 = new Enemy(new BlueAppearance(),15000);
 
-		enemyList.add(e2);
+		GameController.getInstance().enemyList.add(e2);
 		//AnimationPosition anim2 = new AnimationPosition(e2);
 		e2.setPath(this.getWayPoints());
 		tPath.addChild(e2.animation);
 		
 		Enemy e3 = new Enemy(new GreenAppearance(),20000);
 
-		enemyList.add(e3);
+		GameController.getInstance().enemyList.add(e3);
 		//AnimationPosition anim3 = new AnimationPosition(e3);
 		e3.setPath(this.getWayPoints());
 		tPath.addChild(e3.animation);

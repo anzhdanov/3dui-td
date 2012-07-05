@@ -26,6 +26,7 @@ import de.tum.in.far.threedui.project.control.InteractiveMarker;
 import de.tum.in.far.threedui.project.control.ModelRevolver;
 import de.tum.in.far.threedui.project.control.PoseReceiverAlexander;
 import de.tum.in.far.threedui.project.core.ModelLoader.ModelFormat;
+import de.tum.in.far.threedui.project.objects.GameController;
 import de.tum.in.far.threedui.project.objects.IconDisplay;
 
 /*
@@ -65,6 +66,7 @@ public class Exercise5 {
 	private UbitrackFacade ubitrackFacade;
 
 	private CubeObject cubeObject;
+	private GameController gameController;
 	private ModelObject sheepObject;
 	//private ModelObject marker1;
 	private InteractiveMarker marker1;

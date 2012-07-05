@@ -58,6 +58,61 @@ public class CannonTowerController extends Behavior{
 		
 		wakeupOn(condition);
 		
+		
+	
+
+	
+		Vector3f towerPos = new Vector3f();
+
+		Transform3D transTower= new Transform3D();
+		tower.getLocalToVworld(transTower);
+		transTower.get(towerPos);
+		
+		
+
+		
+	
+		
+		Enemy chosen = null;
+		float minDist = Float.MAX_VALUE;
+		
+		for(Enemy e : GameController.getInstance().enemyList)
+		{
+			Vector3f temp = new Vector3f();
+			Transform3D transEnemy = new Transform3D();
+			e.getLocalToVworld(transEnemy);
+			transEnemy.get(temp);
+			
+			Vector3f dist = temp;
+			dist.sub(towerPos);
+			if(dist.length()<minDist) 
+				{
+				minDist = dist.length();
+				chosen = e;
+				}
+
+		}
+					
+		if(chosen!=null)
+		{
+		Vector3f pos2 = new Vector3f();
+		Transform3D transEnemy = new Transform3D();
+		chosen.getLocalToVworld(transEnemy);
+		transEnemy.get(pos2);
+		
+		tower.aimAtPoint(new Point3f(pos2.x,pos2.y,pos2.z));
+		}
+		else
+		{
+
+			Vector3f towerAim = new Vector3f(0,-1,-0.3f);
+
+			transTower.transform(towerAim);
+
+			tower.aimAtPoint(new Point3f(towerAim.x,towerAim.y,towerAim.z));
+		}
+
+		
 		//Transform3D transWorld = new Transform3D();
 		//TowerDefense.getAppInstance().pose0272.getTransformGroup().getTransform(transWorld);
 		//Vector3f pos1 = new Vector3f();
@@ -79,7 +134,7 @@ public class CannonTowerController extends Behavior{
 		//System.out.println(pos2);
 		
 		
-		//tower.aimAtPoint(new Point3f(pos2.x,pos2.y,pos2.z));
+		//
 	}
 
 }
