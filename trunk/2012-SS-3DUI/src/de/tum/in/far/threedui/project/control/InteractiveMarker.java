@@ -100,7 +100,8 @@ public class InteractiveMarker extends ModelObject {
 					
 					//System.out.println("detach!");
 				}
-				poseReceiver.setTracked(false);
+				if (poseReceiver != null)
+					poseReceiver.setTracked(false);
 			}
 		}
 
