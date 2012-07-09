@@ -2,9 +2,12 @@ package de.tum.in.far.threedui.project.core;
 
 import javax.media.j3d.Appearance;
 import javax.media.j3d.BranchGroup;
+import javax.media.j3d.OrientedShape3D;
+import javax.media.j3d.QuadArray;
 import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransformGroup;
 import javax.media.j3d.TransparencyAttributes;
+import javax.vecmath.Point3f;
 import javax.vecmath.Vector3d;
 import javax.vecmath.Vector3f;
 
@@ -13,13 +16,17 @@ import org.jdesktop.j3d.loaders.vrml97.VrmlLoader;
 import com.sun.j3d.loaders.IncorrectFormatException;
 import com.sun.j3d.loaders.ParsingErrorException;
 import com.sun.j3d.loaders.Scene;
+import com.sun.j3d.utils.geometry.Cylinder;
 import com.sun.j3d.utils.geometry.Sphere;
 import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 
+import de.tum.in.far.threedui.project.control.CubeObject;
 import de.tum.in.far.threedui.project.core.ModelLoader.ModelFormat;
 import de.tum.in.far.threedui.project.objects.CannonTower;
 import de.tum.in.far.threedui.project.objects.Enemy;
+import de.tum.in.far.threedui.project.objects.GameController;
 import de.tum.in.far.threedui.project.objects.PathObject;
+import de.tum.in.far.threedui.project.objects.ProjectileController;
 import de.tum.in.far.threedui.general.BlueAppearance;
 import de.tum.in.far.threedui.general.ModelObject;
 import de.tum.in.far.threedui.general.TransformableObject;
@@ -38,6 +45,7 @@ public class TowerDefense extends ThreeDUIApplication {
 	private static TowerDefense app;
 	
 	public PathObject pathObject;
+	
 	
 	public static void main(String[] args) {
 		app = new TowerDefense();
@@ -91,15 +99,19 @@ public class TowerDefense extends ThreeDUIApplication {
 			
 			
 			
-			
 		Appearance app = new BlueAppearance();
 		TransparencyAttributes ta = new TransparencyAttributes();
 		ta.setTransparency(0.5f);
 		ta.setTransparencyMode (ta.BLENDED);
 		app.setTransparencyAttributes(ta);		
 		pathObject = new PathObject(app);
+
+		pathObject.getTransformGroup().addChild(GameController.getInstance().particleGroup);
+		GameController.getInstance().pathObject = pathObject;
 		
 		this.pose0272.getTransformGroup().addChild(pathObject);
+				
+		
 		
 		
 		

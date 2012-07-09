@@ -1,6 +1,8 @@
 package de.tum.in.far.threedui.project.objects;
 
 import java.util.Enumeration;
+import java.util.Iterator;
+import java.util.LinkedList;
 
 import javax.media.j3d.Behavior;
 import javax.media.j3d.BoundingSphere;
@@ -21,9 +23,13 @@ public class CannonTowerController extends Behavior{
 	private float elevation = 0.0f;
 	private CannonTower tower;
 	private boolean up = true;
+	private int shotFrequency = 20;
+	private int lastShot = 0;
+	public static  LinkedList<Projectile> projectileList;
 	
 	public CannonTowerController(CannonTower t) {
 		this.tower = t;
+		this.projectileList = new LinkedList<Projectile>();
 	}
 	@Override
 	public void initialize( ) {
@@ -101,6 +107,29 @@ public class CannonTowerController extends Behavior{
 		transEnemy.get(pos2);
 		
 		tower.aimAtPoint(new Point3f(pos2.x,pos2.y,pos2.z));
+		
+		
+		
+		
+		lastShot++;
+		if(lastShot >= shotFrequency)
+		{
+			System.out.println("Fireing");
+			
+			Vector3f aimVector = tower.getAimVector();
+			aimVector.scale(0.0025f);
+			
+			
+			Projectile p = new Projectile(tower.getBarrelTip(),aimVector, tower.getProjectileLifetime());
+		projectileList.add(p);
+		tower.addChild(p);
+		lastShot=0;
+		}
+		
+		
+		
+		
+		
 		}
 		else
 		{
@@ -112,6 +141,25 @@ public class CannonTowerController extends Behavior{
 			tower.aimAtPoint(new Point3f(towerAim.x,towerAim.y,towerAim.z));
 		}
 
+	
+		
+		
+		for(Projectile p:projectileList)
+		{
+			p.updateProjectile();
+					}
+		
+		Iterator<Projectile> i = projectileList.iterator();
+		
+		while(i.hasNext())
+		{
+			Projectile p = i.next();
+			if(!p.isAlive())
+			{
+				p.detach();
+				i.remove();
+			}
+		}
 		
 		//Transform3D transWorld = new Transform3D();
 		//TowerDefense.getAppInstance().pose0272.getTransformGroup().getTransform(transWorld);
