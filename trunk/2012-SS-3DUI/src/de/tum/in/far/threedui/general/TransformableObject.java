@@ -5,7 +5,7 @@ import javax.media.j3d.TransformGroup;
 
 public class TransformableObject extends BranchGroup {
 
-	public final TransformGroup transGroup;
+	protected final TransformGroup transGroup;
 	
 	public TransformableObject() {
 		transGroup = new TransformGroup();

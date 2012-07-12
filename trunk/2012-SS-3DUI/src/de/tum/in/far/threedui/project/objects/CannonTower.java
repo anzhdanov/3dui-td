@@ -284,7 +284,7 @@ public class CannonTower extends TransformableObject{
 		turretRotation.transform(v);
 		
 		
-		System.out.println(v);
+//		System.out.println(v);
 		return v;
 		
 		

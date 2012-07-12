@@ -6,11 +6,13 @@ import java.util.List;
 import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransformGroup;
 
+import de.tum.in.far.threedui.project.core.NotifyPoseReceiver;
+
 
 public class ControlImpl implements Control {
 
 	private static final int STAT_N = 100;
-	private PoseReceiverAlexander controlPoseReceiver;
+	private NotifyPoseReceiver controlPoseReceiver;
 	private TransformGroup controlTG;
 	private MotionSwitch mSwitch = new MotionSwitch();
 	private SignalProcessor sp = new SignalProcessor(STAT_N);
@@ -108,12 +110,12 @@ public class ControlImpl implements Control {
 		}	
 	}
 
-	public ControlImpl(PoseReceiverAlexander controlPoseReceiver, Button button) {
+	public ControlImpl(NotifyPoseReceiver controlPoseReceiver, Button button) {
 		super();
 		this.controlPoseReceiver = controlPoseReceiver;
 		this.controlTG = controlPoseReceiver.getMarkerTransGroup();
 		this.button = button;		
-		ib = new IndicatorBlock(button.transGroup);
+		ib = new IndicatorBlock(button.getTransformGroup());
 		mRevolvers = new ArrayList<ModelRevolver>();
 		SamplingThread samplingThread = new SamplingThread();
 		samplingThread.setDaemon(true);

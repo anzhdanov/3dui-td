@@ -24,9 +24,8 @@ import de.tum.in.far.threedui.project.control.CubeObjectParameter;
 import de.tum.in.far.threedui.project.control.CylinderSwitch;
 import de.tum.in.far.threedui.project.control.InteractiveMarker;
 import de.tum.in.far.threedui.project.control.ModelRevolver;
-import de.tum.in.far.threedui.project.control.PoseReceiverAlexander;
 import de.tum.in.far.threedui.project.core.ModelLoader.ModelFormat;
-import de.tum.in.far.threedui.project.objects.GameController;
+//import de.tum.in.far.threedui.project.objects.GameController;
 import de.tum.in.far.threedui.project.objects.IconDisplay;
 
 /*
@@ -65,8 +64,8 @@ public class Exercise5 {
 	private ViewerUbitrack viewer;
 	private UbitrackFacade ubitrackFacade;
 
-	private CubeObject cubeObject;
-	private GameController gameController;
+//	private CubeObject cubeObject;
+//	private GameController gameController;
 	private ModelObject sheepObject;
 	//private ModelObject marker1;
 	private InteractiveMarker marker1;
@@ -95,27 +94,27 @@ public class Exercise5 {
 	}
 
 	private void initializeUbitrack() {
-		PoseReceiverAlexander poseReceiver;
-		PoseReceiverAlexander poseReceiver2;
-		PoseReceiverAlexander poseReceiver3;
-		PoseReceiverAlexander poseReceiver4;
+		NotifyPoseReceiver poseReceiver;
+		NotifyPoseReceiver poseReceiver2;
+		NotifyPoseReceiver poseReceiver3;
+		NotifyPoseReceiver poseReceiver4;
 		ImageReceiver imageReceiver;
 
 		ubitrackFacade.initUbitrack();
 
-		poseReceiver = new PoseReceiverAlexander();
+		poseReceiver = new NotifyPoseReceiver(null, buttonGroup);
 		if (!ubitrackFacade.setPoseCallback("posesink", poseReceiver)) {
 			return;
 		}
-		poseReceiver2 = new PoseReceiverAlexander();
+		poseReceiver2 = new NotifyPoseReceiver(null, marker1);
 		if (!ubitrackFacade.setPoseCallback("posesink2", poseReceiver2)) {
 			return;
 		}
-		poseReceiver3 = new PoseReceiverAlexander();
+		poseReceiver3 = new NotifyPoseReceiver(null, null);
 		if (!ubitrackFacade.setPoseCallback("posesink3", poseReceiver3)) {
 			return;
 		}
-		poseReceiver4 = new PoseReceiverAlexander();
+		poseReceiver4 = new NotifyPoseReceiver(null, marker2);
 		if (!ubitrackFacade.setPoseCallback("posesink4", poseReceiver4)) {
 			return;
 		}
@@ -128,10 +127,7 @@ public class Exercise5 {
 		BackgroundObject backgroundObject = new BackgroundObject();
 		viewer.addObject(backgroundObject);
 		imageReceiver.setBackground(backgroundObject.getBackground());
-		poseReceiver.setTransformGroup(buttonGroup.getTransformGroup());		
-		poseReceiver2.setTransformGroup(marker1.getTransformGroup());
 		marker1.setPoseReceiver(poseReceiver2);
-		poseReceiver4.setTransformGroup(marker2.getTransformGroup());
 		marker2.setPoseReceiver(poseReceiver4);
 		
 		//MovementWrapperImpl mWrapper = new MovementWrapperImpl(marker1, sheepObject);
@@ -161,25 +157,30 @@ public class Exercise5 {
 	private void loadModels() {
 
 
-		this.modelLoader.registerModel("Gun-Top", "gun-top.wrl", ModelFormat.VRML97);
-		this.modelLoader.registerModel("Gun-Base", "gun-base.wrl", ModelFormat.VRML97);
-		this.modelLoader.registerModel("Gun-Barrel", "gun-barrel.wrl", ModelFormat.VRML97);
+		this.modelLoader.registerModel("Gun-Top", "gun-top.wrl");
+		this.modelLoader.registerModel("Gun-Base", "gun-base.wrl");
+		this.modelLoader.registerModel("Gun-Barrel", "gun-barrel.wrl");
 
-		this.modelLoader.registerModel("DoubleGun-Top", "doublegun-top.wrl", ModelFormat.VRML97);
-		this.modelLoader.registerModel("DoubleGun-Base", "doublegun-base.wrl", ModelFormat.VRML97);
-		this.modelLoader.registerModel("DoubleGun-Barrel", "doublegun-barrel.wrl", ModelFormat.VRML97);
+		this.modelLoader.registerModel("DoubleGun-Top", "doublegun-top.wrl");
+		this.modelLoader.registerModel("DoubleGun-Base", "doublegun-base.wrl");
+		this.modelLoader.registerModel("DoubleGun-Barrel", "doublegun-barrel.wrl");
 	
-		this.modelLoader.registerModel("Precision-Top", "precision-top.wrl", ModelFormat.VRML97);
-		this.modelLoader.registerModel("Precision-Base", "precision-base.wrl", ModelFormat.VRML97);
-		this.modelLoader.registerModel("Precision-Barrel", "precision-barrel.wrl", ModelFormat.VRML97);
+		this.modelLoader.registerModel("Precision-Top", "precision-top.wrl");
+		this.modelLoader.registerModel("Precision-Base", "precision-base.wrl");
+		this.modelLoader.registerModel("Precision-Barrel", "precision-barrel.wrl");
 	
-		this.modelLoader.registerModel("Gatling-Top", "gatling-top.wrl", ModelFormat.VRML97);
-		this.modelLoader.registerModel("Gatling-Base", "gatling-base.wrl", ModelFormat.VRML97);
-		this.modelLoader.registerModel("Gatling-Barrel", "gatling-barrel.wrl", ModelFormat.VRML97);
+		this.modelLoader.registerModel("Gatling-Top", "gatling-top.wrl");
+		this.modelLoader.registerModel("Gatling-Base", "gatling-base.wrl");
+		this.modelLoader.registerModel("Gatling-Barrel", "gatling-barrel.wrl");
 		
-		this.modelLoader.registerModel("Howitzer-Top", "howitzer-top.wrl", ModelFormat.VRML97);
-		this.modelLoader.registerModel("Howitzer-Base", "howitzer-base.wrl", ModelFormat.VRML97);
-		this.modelLoader.registerModel("Howitzer-Barrel", "howitzer-barrel.wrl", ModelFormat.VRML97);
+		this.modelLoader.registerModel("Howitzer-Top", "howitzer-top.wrl");
+		this.modelLoader.registerModel("Howitzer-Base", "howitzer-base.wrl");
+		this.modelLoader.registerModel("Howitzer-Barrel", "howitzer-barrel.wrl");
+		
+		// TODO
+//		this.modelLoader.registerModel("StunAntenna-Top", "stunantenna-top.wrl");
+//		this.modelLoader.registerModel("StunAntenna-Base", "stunantenna-base.wrl");
+//		this.modelLoader.registerModel("StunAntenna-Barrel", "stunantenna-barrel.wrl");
 		
 		this.modelLoader.registerModel("Howitzer", "howitzer.wrl");
 		this.modelLoader.registerModel("Precision", "precision.wrl");
@@ -193,11 +194,13 @@ public class Exercise5 {
 	
 	private void initMarkers()
 	{
-		modelRevolver = new ModelRevolver(viewer);
-		marker1 = modelRevolver.getViewingWindow();
+		marker1 = new InteractiveMarker();
+		modelRevolver = new ModelRevolver(marker1);
+		viewer.addObject(marker1);
 
-		modelRevolver2 = new ModelRevolver(viewer);
-		marker2 = modelRevolver2.getViewingWindow();
+		marker2 = new InteractiveMarker();
+		modelRevolver2 = new ModelRevolver(marker2);
+		viewer.addObject(marker2);
 	}
 
 	private void initializeJava3D() {
@@ -206,8 +209,8 @@ public class Exercise5 {
 
 		BlueAppearance blueAppearance = new BlueAppearance();
 
-		cubeObject = new CubeObject(new CubeObjectParameter(blueAppearance, 0.023f, 0.023f, 0.023f));
-		viewer.addObject(cubeObject);		
+//		cubeObject = new CubeObject(new CubeObjectParameter(blueAppearance, 0.023f, 0.023f, 0.023f));
+//		viewer.addObject(cubeObject);		
 		
 		RedAppearance redAppearance = new RedAppearance();
 		
@@ -222,6 +225,6 @@ public class Exercise5 {
 		viewer.addObject(buttonGroup);
 
 		System.out.println("Done");
-	}	
+	}
 
 }

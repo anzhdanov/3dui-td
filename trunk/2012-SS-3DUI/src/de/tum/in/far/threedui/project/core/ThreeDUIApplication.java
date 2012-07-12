@@ -36,31 +36,31 @@ public abstract class ThreeDUIApplication {
 	
 	private BackgroundObject backgroundObject;
 
-	public TransformableObject pose0272; // pose receiver 1
-	public TransformableObject pose0690; // pose receiver 2
-	public  TransformableObject pose1228; // pose receiver 3
-	public TransformableObject pose0B44; // pose receiver 4
-	protected TransformableObject pose1C44; // pose receiver 5
-	protected TransformableObject pose005A; // pose receiver 6
-	protected TransformableObject pose0065; // pose receiver 7
-	protected TransformableObject pose0095; // pose receiver 8
-	protected TransformableObject pose003C; // pose receiver 9
-	protected TransformableObject pose0056; // pose receiver 10
-	protected TransformableObject pose00C2; // pose receiver 11
-	protected TransformableObject pose00B0; // pose receiver 12
+	protected TransformableObject markerObject1; // pose receiver 1
+	protected TransformableObject markerObject2; // pose receiver 2
+	protected TransformableObject markerObject3; // pose receiver 3
+	protected TransformableObject markerObject4; // pose receiver 4
+	protected TransformableObject markerObject5; // pose receiver 5
+	protected TransformableObject markerObject6; // pose receiver 6
+	protected TransformableObject markerObject7; // pose receiver 7
+	protected TransformableObject markerObject8; // pose receiver 8
+	protected TransformableObject markerObject9; // pose receiver 9
+	protected TransformableObject markerObject10; // pose receiver 10
+	protected TransformableObject markerObject11; // pose receiver 11
+	protected TransformableObject markerObject12; // pose receiver 12
 
-	private NotifyPoseReceiver poseReceiver;
-	private NotifyPoseReceiver poseReceiver2;
-	private NotifyPoseReceiver poseReceiver3;
-	private NotifyPoseReceiver poseReceiver4;
-	private NotifyPoseReceiver poseReceiver5;
-	private NotifyPoseReceiver poseReceiver6;
-	private NotifyPoseReceiver poseReceiver7;
-	private NotifyPoseReceiver poseReceiver8;
-	private NotifyPoseReceiver poseReceiver9;
-	private NotifyPoseReceiver poseReceiver10;
-	private NotifyPoseReceiver poseReceiver11;
-	private NotifyPoseReceiver poseReceiver12;
+	protected NotifyPoseReceiver poseReceiver;
+	protected NotifyPoseReceiver poseReceiver2;
+	protected NotifyPoseReceiver poseReceiver3;
+	protected NotifyPoseReceiver poseReceiver4;
+	protected NotifyPoseReceiver poseReceiver5;
+	protected NotifyPoseReceiver poseReceiver6;
+	protected NotifyPoseReceiver poseReceiver7;
+	protected NotifyPoseReceiver poseReceiver8;
+	protected NotifyPoseReceiver poseReceiver9;
+	protected NotifyPoseReceiver poseReceiver10;
+	protected NotifyPoseReceiver poseReceiver11;
+	protected NotifyPoseReceiver poseReceiver12;
 	private ImageReceiver imageReceiver;
 	
 	protected ModelLoader modelLoader;
@@ -86,41 +86,41 @@ public abstract class ThreeDUIApplication {
 		System.out.println("Creating Viewer - " + title);
 		viewer = new ViewerUbitrack(title, ubitrackFacade);
 
-		pose0272 = new TransformableObject();
-		viewer.addObject(pose0272);
+		markerObject1 = new TransformableObject();
+		viewer.addObject(markerObject1);
 		
-		pose0690 = new TransformableObject();
-		viewer.addObject(pose0690);
+		markerObject2 = new TransformableObject();
+		viewer.addObject(markerObject2);
 		
-		pose1228 = new TransformableObject();
-		viewer.addObject(pose1228);
+		markerObject3 = new TransformableObject();
+		viewer.addObject(markerObject3);
 		
-		pose0B44 = new TransformableObject();
-		viewer.addObject(pose0B44);
+		markerObject4 = new TransformableObject();
+		viewer.addObject(markerObject4);
 
-		pose1C44 = new TransformableObject();
-		viewer.addObject(pose1C44);
+		markerObject5 = new TransformableObject();
+		viewer.addObject(markerObject5);
 
-		pose005A = new TransformableObject();
-		viewer.addObject(pose005A);
+		markerObject6 = new TransformableObject();
+		viewer.addObject(markerObject6);
 
-		pose0065 = new TransformableObject();
-		viewer.addObject(pose0065);
+		markerObject7 = new TransformableObject();
+		viewer.addObject(markerObject7);
 		
-		pose0095 = new TransformableObject();
-		viewer.addObject(pose0095);
+		markerObject8 = new TransformableObject();
+		viewer.addObject(markerObject8);
 		
-		pose003C = new TransformableObject();
-		viewer.addObject(pose003C);
+		markerObject9 = new TransformableObject();
+		viewer.addObject(markerObject9);
 		
-		pose0056 = new TransformableObject();
-		viewer.addObject(pose0056);
+		markerObject10 = new TransformableObject();
+		viewer.addObject(markerObject10);
 
-		pose00C2 = new TransformableObject();
-		viewer.addObject(pose00C2);
+		markerObject11 = new TransformableObject();
+		viewer.addObject(markerObject11);
 
-		pose00B0 = new TransformableObject();
-		viewer.addObject(pose00B0);
+		markerObject12 = new TransformableObject();
+		viewer.addObject(markerObject12);
 
 		backgroundObject = new BackgroundObject();
 		viewer.addObject(backgroundObject);
@@ -129,51 +129,51 @@ public abstract class ThreeDUIApplication {
 	private void initializeUbitrack() {
 		ubitrackFacade.initUbitrack();
 		
-		poseReceiver = new NotifyPoseReceiver(this, this.pose0272);
+		poseReceiver = new NotifyPoseReceiver(this, this.markerObject1);
 		if (!ubitrackFacade.setPoseCallback("posesink", poseReceiver)) {
 			return;
 		}
-		poseReceiver2 = new NotifyPoseReceiver(this, this.pose0690);
+		poseReceiver2 = new NotifyPoseReceiver(this, this.markerObject2);
 		if (!ubitrackFacade.setPoseCallback("posesink2", poseReceiver2)) {
 			return;
 		}
-		poseReceiver3 = new NotifyPoseReceiver(this, this.pose1228);
+		poseReceiver3 = new NotifyPoseReceiver(this, this.markerObject3);
 		if (!ubitrackFacade.setPoseCallback("posesink3", poseReceiver3)) {
 			return;
 		}
-		poseReceiver4 = new NotifyPoseReceiver(this, this.pose0B44);
+		poseReceiver4 = new NotifyPoseReceiver(this, this.markerObject4);
 		if (!ubitrackFacade.setPoseCallback("posesink4", poseReceiver4)) {
 			return;
 		}
-		poseReceiver5 = new NotifyPoseReceiver(this, this.pose1C44);
+		poseReceiver5 = new NotifyPoseReceiver(this, this.markerObject5);
 		if (!ubitrackFacade.setPoseCallback("posesink5", poseReceiver5)) {
 			return;
 		}
-		poseReceiver6 = new NotifyPoseReceiver(this, this.pose005A);
+		poseReceiver6 = new NotifyPoseReceiver(this, this.markerObject6);
 		if (!ubitrackFacade.setPoseCallback("posesink6", poseReceiver6)) {
 			return;
 		}
-		poseReceiver7 = new NotifyPoseReceiver(this, this.pose0065);
+		poseReceiver7 = new NotifyPoseReceiver(this, this.markerObject7);
 		if (!ubitrackFacade.setPoseCallback("posesink7", poseReceiver7)) {
 			return;
 		}
-		poseReceiver8 = new NotifyPoseReceiver(this, this.pose0095);
+		poseReceiver8 = new NotifyPoseReceiver(this, this.markerObject8);
 		if (!ubitrackFacade.setPoseCallback("posesink8", poseReceiver8)) {
 			return;
 		}
-		poseReceiver9 = new NotifyPoseReceiver(this, this.pose003C);
+		poseReceiver9 = new NotifyPoseReceiver(this, this.markerObject9);
 		if (!ubitrackFacade.setPoseCallback("posesink9", poseReceiver9)) {
 			return;
 		}
-		poseReceiver10 = new NotifyPoseReceiver(this, this.pose0056);
+		poseReceiver10 = new NotifyPoseReceiver(this, this.markerObject10);
 		if (!ubitrackFacade.setPoseCallback("posesink10", poseReceiver10)) {
 			return;
 		}
-		poseReceiver11 = new NotifyPoseReceiver(this, this.pose00C2);
+		poseReceiver11 = new NotifyPoseReceiver(this, this.markerObject11);
 		if (!ubitrackFacade.setPoseCallback("posesink11", poseReceiver11)) {
 			return;
 		}
-		poseReceiver12 = new NotifyPoseReceiver(this, this.pose00B0);
+		poseReceiver12 = new NotifyPoseReceiver(this, this.markerObject12);
 		if (!ubitrackFacade.setPoseCallback("posesink12", poseReceiver12)) {
 			return;
 		}

@@ -7,6 +7,6 @@
 	<classpathentry kind="lib" path="libs/jar/vecmath.jar"/>
 	<classpathentry kind="lib" path="libs/jar/j3d-vrml97.jar"/>
 	<classpathentry kind="lib" path="libs/jar/ubitrack.jar"/>
-	<classpathentry kind="lib" path="C:/Users/pjotr/Documents/3dui/2012-SS-3DUI/libs/jar/freehep-java3d-2.0-20060602.224901-1.jar"/>
+	<classpathentry kind="lib" path="libs/jar/freehep-java3d-2.0-20060602.224901-1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
