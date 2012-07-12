@@ -23,7 +23,7 @@ public class CannonTowerController extends Behavior{
 	private float elevation = 0.0f;
 	private CannonTower tower;
 	private boolean up = true;
-	private int shotFrequency = 20;
+	private int shotFrequency = 4;
 	private int lastShot = 0;
 	public static  LinkedList<Projectile> projectileList;
 	
@@ -117,10 +117,10 @@ public class CannonTowerController extends Behavior{
 			System.out.println("Fireing");
 			
 			Vector3f aimVector = tower.getAimVector();
-			aimVector.scale(0.0025f);
+			aimVector.scale(tower.getProjectileSpeed());
 			
 			
-			Projectile p = new Projectile(tower.getBarrelTip(),aimVector, tower.getProjectileLifetime());
+			Projectile p = new Projectile(tower.getBarrelTipAsWorldCoords(),aimVector, tower.getProjectileLifetime());
 		projectileList.add(p);
 		tower.addChild(p);
 		lastShot=0;
@@ -141,13 +141,23 @@ public class CannonTowerController extends Behavior{
 			tower.aimAtPoint(new Point3f(towerAim.x,towerAim.y,towerAim.z));
 		}
 
-	
 		
 		
 		for(Projectile p:projectileList)
 		{
 			p.updateProjectile();
-					}
+			
+			
+			for(Enemy e:GameController.getInstance().enemyList)
+			{
+				Vector3f enemyPos = new Vector3f();
+				Transform3D transEnemy = new Transform3D();
+				e.getLocalToVworld(transEnemy);
+				transEnemy.get(enemyPos);
+				
+				
+			}
+		}
 		
 		Iterator<Projectile> i = projectileList.iterator();
 		
@@ -161,28 +171,7 @@ public class CannonTowerController extends Behavior{
 			}
 		}
 		
-		//Transform3D transWorld = new Transform3D();
-		//TowerDefense.getAppInstance().pose0272.getTransformGroup().getTransform(transWorld);
-		//Vector3f pos1 = new Vector3f();
-		//transWorld.get(pos1);
-		
-		
-		//Transform3D trans = new Transform3D();
-	//	Enemy e = TowerDefense.getAppInstance().pathObject.enemyList.getFirst();
-	//	trans = e.animation.getCurrentTransformation();
-	//	Vector3f pos2 = new Vector3f();
-	//	trans.get(pos2);
-		
-	//	transWorld.transform(pos2);
-		
-	//	pos2.add(pos1);
-		
-		
-		
-		//System.out.println(pos2);
-		
-		
-		//
+
 	}
 
 }
