@@ -24,13 +24,6 @@ public class GeneralSwitch extends Button  {
 		
 		buttonSwitch = new Switch(0);
 		buttonSwitch.setCapability(Switch.ALLOW_SWITCH_WRITE);
-		Transform3D rotate = new Transform3D();
-		Transform3D translate = new Transform3D();
-		translate.setTranslation(new Vector3d(0, 0.025, 0));
-		rotate.rotX(Math.PI/2);
-		rotate.mul(translate);
-		TransformGroup switchGroup = new TransformGroup(rotate);
-		switchGroup.addChild(buttonSwitch);		
 
 
 		TransformGroup child1TG = createTransformGroup();
@@ -39,9 +32,9 @@ public class GeneralSwitch extends Button  {
 		//add to the switch
 		buttonSwitch.addChild(child1TG);
 		buttonSwitch.addChild(child2TG);
-		child1TG.addChild(shape1);
-		child2TG.addChild(shape2);
-		transGroup.addChild(switchGroup);
+		if (shape1 != null) child1TG.addChild(shape1);
+		if (shape2 != null) child2TG.addChild(shape2);
+		transGroup.addChild(buttonSwitch);
 	}
 
 	public void switchOn(){

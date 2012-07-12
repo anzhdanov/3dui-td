@@ -9,19 +9,16 @@ import de.tum.in.far.threedui.project.objects.CannonTower;
 
 public class ModelRevolver {
 
-	private static final String FOLDER = "models";
 	private InteractiveMarker viewingWindow;	
-//	private ModelLoader ml = null;
 	private CannonTower currentDisplayed;
-	private ViewerUbitrack viewer; 
 	private Control control;
 	private int id;
 
-	public ModelRevolver(ViewerUbitrack viewer) {
-		super();		
-		this.viewer = viewer;
+	public ModelRevolver(InteractiveMarker interactiveMarker) {
+		super();
+		this.viewingWindow = interactiveMarker;
+		this.viewingWindow.setModelRevolver(this);
 		
-		displayModel(0);
 	}
 	
 
@@ -29,41 +26,17 @@ public class ModelRevolver {
 	{
 		if(currentDisplayed != null && currentDisplayed.getType() == type) return;
 		
-		if(currentDisplayed!=null)
+		if(currentDisplayed != null)
 			currentDisplayed.detach();
-		//get model by id
-		CannonTower c = new CannonTower(type);
-		//ModelObject model = ml.getModel(id);
-	//	System.out.println(model);
 
-		if(viewingWindow == null){
-			viewingWindow = new InteractiveMarker(c, this);				
-			viewer.addObject(viewingWindow);
-		}else{
-			viewingWindow.transGroup.addChild(c);
-		}
+		CannonTower c = new CannonTower(type);
+		viewingWindow.getTransformGroup().addChild(c);
 
 		currentDisplayed = c;
 	}
 	
 	public void displayModel(int id){		
-		
 		displayModel(CannonTower.getTypeByID(id));
-	}
-
-	public void loadModels(){
-		File folder = new File(FOLDER);
-		File[] listOfFiles = folder.listFiles(); 
-		String file = null;		
-		for (int i = 0; i < listOfFiles.length; i++) {
-			if(listOfFiles[i].isFile()){
-				file = listOfFiles[i].getName();
-				if(!file.contains("-")){
-//					ml.loadModel(file);	
-				}
-			}
-		}
-		displayModel(3);
 	}
 
 	public InteractiveMarker getViewingWindow() {

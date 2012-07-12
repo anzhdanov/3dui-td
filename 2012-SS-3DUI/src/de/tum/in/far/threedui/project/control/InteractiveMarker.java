@@ -1,26 +1,26 @@
 package de.tum.in.far.threedui.project.control;
 
-import javax.media.j3d.BranchGroup;
 import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransformGroup;
 import javax.vecmath.Vector3f;
 
-import de.tum.in.far.threedui.general.ModelObject;
-import de.tum.in.far.threedui.general.RedAppearance;
+import de.tum.in.far.threedui.general.TransformableObject;
+import de.tum.in.far.threedui.project.core.NotifyPoseReceiver;
+import de.tum.in.far.threedui.project.objects.SelectionAppearance;
 
-public class InteractiveMarker extends ModelObject {
+public class InteractiveMarker extends TransformableObject {
 
-	private PoseReceiverAlexander poseReceiver;
+	private NotifyPoseReceiver poseReceiver;
 	private GeneralSwitch gSwitch;
 	private ModelRevolver mRevolver;
 	private boolean state = false;
 	private boolean isPressed = false;
 
-	public PoseReceiverAlexander getPoseReceiver() {
+	public NotifyPoseReceiver getPoseReceiver() {
 		return poseReceiver;
 	}
 
-	public void setPoseReceiver(PoseReceiverAlexander poseReceiver) {
+	public void setPoseReceiver(NotifyPoseReceiver poseReceiver) {
 		this.poseReceiver = poseReceiver;
 		//		InteractThread thread = new InteractThread();
 		//		thread.setDaemon(true);
@@ -33,35 +33,27 @@ public class InteractiveMarker extends ModelObject {
 		thread.start();
 	}
 
-	public InteractiveMarker(BranchGroup model, ModelRevolver mRevolver) {
-		super(model);
-		this.mRevolver = mRevolver;
-		CubeObjectParameter parameter1 =
-				new CubeObjectParameter(new RedAppearance(), 0.0f, 0.0f, 0.0f);
-		CubeObject cube1 = new CubeObject(parameter1);
-		CubeObjectParameter parameter2 =
-				new CubeObjectParameter(new RedAppearance(), 0.023f, 0.023f, 0.0023f);
-		CubeObject cube2 = new CubeObject(parameter2);
+	public InteractiveMarker() {
+		CubeObjectParameter parameter =
+				new CubeObjectParameter(new SelectionAppearance(), 0.023f, 0.023f, 0.023f);
+		CubeObject cube = new CubeObject(parameter);
 
 		TransformGroup sTG = new TransformGroup();
-		Transform3D rot = new Transform3D();
 		Transform3D tran = new Transform3D();
-		tran.setTranslation(new Vector3f(0.02f,0.02f,0.0f));
-		rot.mul(tran);
-		rot.rotX(Math.PI/2);
-		sTG.setTransform(rot);
-		sTG.addChild(cube2);
+		tran.setTranslation(new Vector3f(0.0f, 0.0f, 0.023f));
+		sTG.setTransform(tran);
+		sTG.addChild(cube);
 
-		gSwitch = new GeneralSwitch(cube1, sTG);	
+		gSwitch = new GeneralSwitch(null, sTG);
 		gSwitch.switchOff();
 		transGroup.addChild(gSwitch);
 	}
+	
+	public void setModelRevolver(ModelRevolver mRevolver) {
+		this.mRevolver = mRevolver;
+	}
 
 	class InteractThread extends Thread{
-		//CubeObjectParameter parameter =
-		//		new CubeObjectParameter(new RedAppearance(), 0.023f, 0.023f, 0.0023f);
-		//CubeObject cube = new CubeObject(parameter);
-		//ModelObject model = new ModelObject(cube);		
 		public void run(){
 			Control control = null;
 			int id = 0;

@@ -16,7 +16,7 @@ public class MovementWrapperImpl extends TransformableObject implements Movement
 	public MovementWrapperImpl(ModelObject marker1, ModelObject sheepObject) {
 		sheepObject.detach();		
 		super.transGroup.addChild(sheepObject);
-		marker1.transGroup.addChild(this);	
+		marker1.getTransformGroup().addChild(this);	
 	}
 
 	@Override

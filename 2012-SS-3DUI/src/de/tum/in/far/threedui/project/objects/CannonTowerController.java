@@ -114,7 +114,7 @@ public class CannonTowerController extends Behavior{
 		lastShot++;
 		if(lastShot >= shotFrequency)
 		{
-			System.out.println("Fireing");
+//			System.out.println("Fireing");
 			
 			Vector3f aimVector = tower.getAimVector();
 			aimVector.scale(tower.getProjectileSpeed());
