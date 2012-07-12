@@ -39,6 +39,7 @@ public class CannonTower extends TransformableObject{
 	private float turretAngle = 0;
 	private float barrelAngle = 0;
 	private float projectileLifetime;
+	private float projectileSpeed = 0.0025f;
 	
 	private TransformGroup turretRotGroup;
 	private TransformGroup barrelRotGroup;
@@ -115,6 +116,7 @@ public class CannonTower extends TransformableObject{
 			cannonBarrel = this.loader.getModelObject("Precision-Barrel");
 			barrelYOffset = 0.024f;
 			projectileLifetime = 200;
+			projectileSpeed = 0.007f;
 			
 		}
 		else if(type == Type.GATLING)
@@ -125,6 +127,7 @@ public class CannonTower extends TransformableObject{
 			barrelYOffset = 0.013f;
 			
 			projectileLifetime = 100;
+			projectileSpeed = 0.005f;
 			
 		}
 		else if(type == Type.HOWITZER)
@@ -293,7 +296,23 @@ public class CannonTower extends TransformableObject{
 	
 	public Vector3f getBarrelTip()
 	{
-		return new Vector3f(0,this.barrelYOffset,0);
+		return new Vector3f(0,0,barrelYOffset);
+	}
+	
+	
+	public Vector3f getBarrelTipAsWorldCoords()
+	{
+		Transform3D t3d = new Transform3D();
+		this.getLocalToVworld(t3d);
+		Vector3f v = getBarrelTip();
+		t3d.transform(v);
+		
+		return v;
+	}
+	
+	public float getProjectileSpeed()
+	{
+		return this.projectileSpeed;
 	}
 
 }
