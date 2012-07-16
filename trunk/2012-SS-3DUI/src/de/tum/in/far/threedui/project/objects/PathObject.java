@@ -32,6 +32,7 @@ public class PathObject extends TransformableObject {
 	//Internal map
 	private int xres= 10;
 	private int yres= 12;
+	private TransformGroup tPath;
 	
 	
 	private float tileWidth = 0.025f;
@@ -95,7 +96,9 @@ public class PathObject extends TransformableObject {
 		
 		//transformation.setRotation(new AxisAngle4d(new Vector3d(0.0f,0.0f,1.0f),1.0));
 		trans2.setTranslation(new Vector3d(-xOffset,-yOffset,0.0f));
-		TransformGroup tPath = new TransformGroup();
+		
+		
+		tPath = new TransformGroup();
 		tPath.setTransform(trans2);
 		tPath.addChild(bGroup);
 		
@@ -140,6 +143,13 @@ public class PathObject extends TransformableObject {
 		
 	
 	}
+	
+	public void attachEnemy(Enemy e)
+	{
+		e.setPath(this.getWayPoints());
+		tPath.addChild(e.animation);
+	}
+	
 	public void setPath(int x, int y)
 	{
 		this.map[x+y*xres]=1;
