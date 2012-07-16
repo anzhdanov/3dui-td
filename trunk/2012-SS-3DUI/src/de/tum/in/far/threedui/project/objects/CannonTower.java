@@ -41,6 +41,8 @@ public class CannonTower extends TransformableObject{
 	private float projectileLifetime;
 	private float projectileSpeed = 0.0025f;
 	
+	private Vector3f aimPoint;
+	
 	private TransformGroup turretRotGroup;
 	private TransformGroup barrelRotGroup;
 	
@@ -199,6 +201,7 @@ public class CannonTower extends TransformableObject{
 	 */
 	public void aimAtPoint(Point3f aimPoint)
 	{
+		this.aimPoint = new Vector3f(aimPoint);
 		
 		Transform3D t3d = new Transform3D();
 		Point3f position = new Point3f();
@@ -276,15 +279,24 @@ public class CannonTower extends TransformableObject{
 	public Vector3f getAimVector()
 	{
 		
-		Vector3f v = new Vector3f(0.0f,-1.0f,0.0f);
+		/*Vector3f v = new Vector3f(0.0f,-1.0f,0.0f);
 
 		barrelElevation.rotX(barrelAngle);
 		barrelElevation.transform(v);
 		turretRotation.rotZ(turretAngle);
 		turretRotation.transform(v);
 		
-		
+		*/
 //		System.out.println(v);
+		
+		Transform3D t3d = new Transform3D();
+		Vector3f currentPos = new Vector3f();
+		this.getLocalToVworld(t3d);
+		t3d.get(currentPos);
+		
+		Vector3f v = new Vector3f();
+		v.sub(aimPoint,currentPos);
+		
 		return v;
 		
 		
