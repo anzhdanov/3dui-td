@@ -13,6 +13,7 @@ public class NotifyPoseReceiver extends SimplePoseReceiver {
 
 	protected ThreeDUIApplication app;
 	protected TransformableObject poseObject;
+	private boolean beenTracked = false;
 	private boolean tracked = false;
 	private boolean moving = false;
 	private Vector3d transVec;
@@ -50,6 +51,11 @@ public class NotifyPoseReceiver extends SimplePoseReceiver {
 		}
 		
 		this.tracked = true;
+		this.beenTracked = true;
+	}
+	
+	public boolean hasBeenTracked() {
+		return this.beenTracked;
 	}
 
 	public Vector3d getTranslation() {

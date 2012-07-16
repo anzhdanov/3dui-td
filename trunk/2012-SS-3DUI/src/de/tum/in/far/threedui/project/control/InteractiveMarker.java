@@ -67,12 +67,12 @@ public class InteractiveMarker extends TransformableObject {
 				
 				//System.out.println("live!");
 				try {
-					Thread.sleep(100);
+					Thread.sleep(250);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				if(poseReceiver!=null && !poseReceiver.isTracked()){
+				if(poseReceiver!=null && poseReceiver.hasBeenTracked() && !poseReceiver.isTracked()){
 					if (!isPressed) {
 						//System.out.println("not tracked!");
 					

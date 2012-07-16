@@ -23,7 +23,7 @@ public class IndicatorBlock {
 		Transform3D indT = new Transform3D();
 		indT.setTranslation(new Vector3d(0.033,0.033,0));
 		indTG.setTransform(indT);
-		indTG.addChild(directionIndicator);
+//		indTG.addChild(directionIndicator); // don't display indicator
 		indBG.addChild(indTG);
 		tg.addChild(indBG);
 	}
@@ -45,12 +45,13 @@ public class IndicatorBlock {
 		}		
 	}
 	public boolean turnDirectionIndicator(double[] thrshAngles) {
-		if( Math.abs(thrshAngles[2]) < 45){
+		directionIndicator.switchOff(); return true; // never disable
+/*		if( Math.abs(thrshAngles[2]) < 45){
 			directionIndicator.switchOff();
 			return true;
 		}
 		directionIndicator.switchOn();	
-		return false;
+		return false;*/
 	}	
 
 }

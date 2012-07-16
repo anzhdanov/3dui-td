@@ -27,7 +27,7 @@ public class SignalProcessor {
 	public double applyThreshold(double angle, double mean){
 		double angleThresh = 0;
 		double delta = abs(angle) - abs(mean);
-		if(abs(atan(delta)) > 0.9*PI/2){
+		if(abs(atan(delta)) > 0.85*PI/2){ // Value to change for sensibility
 			if(angle > 0){
 				angleThresh = delta;
 			}else{

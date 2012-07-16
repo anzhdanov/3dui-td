@@ -1,8 +1,11 @@
 package de.tum.in.far.threedui.project.core;
 
+import java.util.LinkedList;
+
 import de.tum.in.far.threedui.general.BackgroundObject;
 import de.tum.in.far.threedui.general.BinaryEnv;
 import de.tum.in.far.threedui.general.ImageReceiver;
+import de.tum.in.far.threedui.general.PoseReceiver;
 import de.tum.in.far.threedui.general.TransformableObject;
 import de.tum.in.far.threedui.general.UbitrackFacade;
 import de.tum.in.far.threedui.general.ViewerUbitrack;
@@ -36,31 +39,9 @@ public abstract class ThreeDUIApplication {
 	
 	private BackgroundObject backgroundObject;
 
-	protected TransformableObject markerObject1; // pose receiver 1
-	protected TransformableObject markerObject2; // pose receiver 2
-	protected TransformableObject markerObject3; // pose receiver 3
-	protected TransformableObject markerObject4; // pose receiver 4
-	protected TransformableObject markerObject5; // pose receiver 5
-	protected TransformableObject markerObject6; // pose receiver 6
-	protected TransformableObject markerObject7; // pose receiver 7
-	protected TransformableObject markerObject8; // pose receiver 8
-	protected TransformableObject markerObject9; // pose receiver 9
-	protected TransformableObject markerObject10; // pose receiver 10
-	protected TransformableObject markerObject11; // pose receiver 11
-	protected TransformableObject markerObject12; // pose receiver 12
+	protected TransformableObject[] markerObjects;
+	protected NotifyPoseReceiver[] poseReceivers;
 
-	protected NotifyPoseReceiver poseReceiver;
-	protected NotifyPoseReceiver poseReceiver2;
-	protected NotifyPoseReceiver poseReceiver3;
-	protected NotifyPoseReceiver poseReceiver4;
-	protected NotifyPoseReceiver poseReceiver5;
-	protected NotifyPoseReceiver poseReceiver6;
-	protected NotifyPoseReceiver poseReceiver7;
-	protected NotifyPoseReceiver poseReceiver8;
-	protected NotifyPoseReceiver poseReceiver9;
-	protected NotifyPoseReceiver poseReceiver10;
-	protected NotifyPoseReceiver poseReceiver11;
-	protected NotifyPoseReceiver poseReceiver12;
 	private ImageReceiver imageReceiver;
 	
 	protected ModelLoader modelLoader;
@@ -86,41 +67,13 @@ public abstract class ThreeDUIApplication {
 		System.out.println("Creating Viewer - " + title);
 		viewer = new ViewerUbitrack(title, ubitrackFacade);
 
-		markerObject1 = new TransformableObject();
-		viewer.addObject(markerObject1);
-		
-		markerObject2 = new TransformableObject();
-		viewer.addObject(markerObject2);
-		
-		markerObject3 = new TransformableObject();
-		viewer.addObject(markerObject3);
-		
-		markerObject4 = new TransformableObject();
-		viewer.addObject(markerObject4);
+		markerObjects = new TransformableObject[12];
 
-		markerObject5 = new TransformableObject();
-		viewer.addObject(markerObject5);
-
-		markerObject6 = new TransformableObject();
-		viewer.addObject(markerObject6);
-
-		markerObject7 = new TransformableObject();
-		viewer.addObject(markerObject7);
-		
-		markerObject8 = new TransformableObject();
-		viewer.addObject(markerObject8);
-		
-		markerObject9 = new TransformableObject();
-		viewer.addObject(markerObject9);
-		
-		markerObject10 = new TransformableObject();
-		viewer.addObject(markerObject10);
-
-		markerObject11 = new TransformableObject();
-		viewer.addObject(markerObject11);
-
-		markerObject12 = new TransformableObject();
-		viewer.addObject(markerObject12);
+		for(int i = 0; i < 12; i++) {
+			TransformableObject markerObject = new TransformableObject();
+			markerObjects[i] = markerObject;
+			viewer.addObject(markerObject);
+		}
 
 		backgroundObject = new BackgroundObject();
 		viewer.addObject(backgroundObject);
@@ -129,8 +82,20 @@ public abstract class ThreeDUIApplication {
 	private void initializeUbitrack() {
 		ubitrackFacade.initUbitrack();
 		
-		poseReceiver = new NotifyPoseReceiver(this, this.markerObject1);
-		if (!ubitrackFacade.setPoseCallback("posesink", poseReceiver)) {
+		String[] suffix = {"", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"};
+		
+		poseReceivers = new NotifyPoseReceiver[12];
+		
+		for (int i = 0; i < 12; i++) {
+			NotifyPoseReceiver poseReceiver = new NotifyPoseReceiver(this, this.markerObjects[i]);
+			poseReceivers[i] = poseReceiver;
+			if (!ubitrackFacade.setPoseCallback("posesink" + suffix[i], poseReceiver)) {
+				return;
+			}
+		}
+/*		
+		poseReceiver1 = new NotifyPoseReceiver(this, this.markerObject1);
+		if (!ubitrackFacade.setPoseCallback("posesink", poseReceiver1)) {
 			return;
 		}
 		poseReceiver2 = new NotifyPoseReceiver(this, this.markerObject2);
@@ -177,7 +142,7 @@ public abstract class ThreeDUIApplication {
 		if (!ubitrackFacade.setPoseCallback("posesink12", poseReceiver12)) {
 			return;
 		}
-
+*/
 		imageReceiver = new ImageReceiver();
 		if (!ubitrackFacade.setImageCallback("imgsink", imageReceiver)) {
 			return;

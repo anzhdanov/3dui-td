@@ -31,17 +31,17 @@ public class IconDisplay extends TransformableObject {
 		o3 = loader.getModelObject("Gatling");
 		o4 = loader.getModelObject("Howitzer");
 		o5 = loader.getModelObject("StunAntenna");
-		modelList.push(o0);
-		modelList.push(o1);
-		modelList.push(o2);
-		modelList.push(o3);
-		modelList.push(o4);
-		modelList.push(o5);
+		modelList.add(o0);
+		modelList.add(o1);
+		modelList.add(o2);
+		modelList.add(o3);
+		modelList.add(o4);
+//		modelList.add(o5);
 
 
 		
 		float radius = 0.05f;
-		float step = (float) (0 + 5.0f * (Math.PI*2 / 8.0f));
+		float step = (float) (2.0f * (Math.PI*2 / 8.0f));
 		
 		for (ModelObject o  : modelList) {
 			
@@ -60,7 +60,7 @@ public class IconDisplay extends TransformableObject {
 			o.getTransformGroup().setTransform(t);
 			
 			transGroup.addChild(o);
-			step+= Math.PI*2 / 8.0f;
+			step-= Math.PI*2 / 8.0f;
 		}
 		
 		

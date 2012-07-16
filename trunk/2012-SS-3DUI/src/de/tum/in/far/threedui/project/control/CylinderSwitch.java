@@ -32,7 +32,7 @@ public class CylinderSwitch extends Button  {
 		buttonSwitch.setCapability(Switch.ALLOW_SWITCH_WRITE);
 		Transform3D rotate = new Transform3D();
 		Transform3D translate = new Transform3D();
-		translate.setTranslation(new Vector3d(0, 0.025, 0));
+		translate.setTranslation(new Vector3d(0, 0, 0));
 		rotate.rotX(Math.PI/2);
 		rotate.mul(translate);
 		TransformGroup switchGroup = new TransformGroup(rotate);
