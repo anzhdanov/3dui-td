@@ -27,6 +27,8 @@ public class AnimationPosition extends BranchGroup {
     
 	public AnimationPosition(BranchGroup targetObject) {
 		
+		this.setCapability(BranchGroup.ALLOW_DETACH);
+		
 		targetTransformGroup = new TransformGroup();
 		targetTransformGroup.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
 		targetTransformGroup.addChild(targetObject);
@@ -39,6 +41,7 @@ public class AnimationPosition extends BranchGroup {
 	    positions[2]= new Point3f( -0.1f,  0.0f, -0.02f);
 		
 		a = new Alpha(-1, (int)((Enemy)targetObject).speed); //-1=infinity and a rotation takes 3000ms
+		a.setStartTime(System.currentTimeMillis() + 50);
 		axis = new Transform3D();
 		axis.set(new Vector3d(0.0f,0.0f,1.0f));
 		positionInterpolator = 

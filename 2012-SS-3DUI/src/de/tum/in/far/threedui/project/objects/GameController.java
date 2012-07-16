@@ -21,7 +21,6 @@ public class GameController extends TransformableObject{
 	public LinkedList<Enemy> enemyList;
 	public BranchGroup particleGroup;
 	public PathObject pathObject = null;
-	private EnemySpawnController eSpawn;
 	
 	
 	public static GameController getInstance()
@@ -37,9 +36,6 @@ public class GameController extends TransformableObject{
 	{
 		enemyList = new LinkedList<Enemy>();
 	
-		eSpawn = EnemySpawnController.getInstance();
-		pathObject.addChild(eSpawn);
-		
 		particleGroup = new BranchGroup();
 		particleGroup.setCapability(BranchGroup.ALLOW_CHILDREN_EXTEND);
 		particleGroup.setCapability(BranchGroup.ALLOW_CHILDREN_WRITE);
