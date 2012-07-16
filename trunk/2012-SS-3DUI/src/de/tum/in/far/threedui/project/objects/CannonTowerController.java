@@ -25,7 +25,7 @@ public class CannonTowerController extends Behavior{
 	private boolean up = true;
 	private int shotFrequency = 4;
 	private int lastShot = 0;
-	public static  LinkedList<Projectile> projectileList;
+	public LinkedList<Projectile> projectileList;
 	
 	public CannonTowerController(CannonTower t) {
 		this.tower = t;
