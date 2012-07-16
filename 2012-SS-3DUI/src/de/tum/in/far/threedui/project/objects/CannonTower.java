@@ -245,6 +245,8 @@ public class CannonTower extends TransformableObject{
 		if(Float.isNaN(angle_rot)) angle_rot = 0;
 		if(Float.isNaN(angle_elev)) angle_elev = 0;
 		
+		if(aimPoint.x<0) angle_rot *= -1;
+		if(aimPoint.z>position.z) angle_elev *= -1;
 		
 		setTurretAngle(angle_rot);
 		setBarrelElevation(angle_elev);
