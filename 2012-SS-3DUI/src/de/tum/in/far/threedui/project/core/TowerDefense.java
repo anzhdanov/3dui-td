@@ -72,7 +72,15 @@ public class TowerDefense extends ThreeDUIApplication {
 		super.init();
 		
 		registerModels();
-		
+
+//		createCoordsOnMarkers(); // debug
+		createGameField();
+		createController();
+		createModelRevolvers();
+	}
+	
+	private void createGameField() {
+		// Marker #0: game field
 		Appearance app = new BlueAppearance();
 		TransparencyAttributes ta = new TransparencyAttributes();
 		ta.setTransparency(0.5f);
@@ -83,13 +91,11 @@ public class TowerDefense extends ThreeDUIApplication {
 		pathObject.getTransformGroup().addChild(GameController.getInstance().particleGroup);
 		GameController.getInstance().pathObject = pathObject;
 		
-		// Marker #0: game field
 		this.markerObjects[0].getTransformGroup().addChild(pathObject);
-				
-//		createCoordsOnMarkers(); // debug
-//		createTowersOnMarkers();
-		
-		// Code taken from Alexander (control stuff)
+	}
+	
+	private void createController() {
+		// Marker #1: controller
 		BlueAppearance blueAppearance = new BlueAppearance();
 		RedAppearance redAppearance = new RedAppearance();
 
@@ -98,12 +104,13 @@ public class TowerDefense extends ThreeDUIApplication {
 		iDisplay = new IconDisplay();
 		controllerGroup.getTransformGroup().addChild(iDisplay);
 
-		// Marker #1: controller
 		this.markerObjects[1].getTransformGroup().addChild(controllerGroup);
 		control = new ControlImpl(poseReceivers[1], button);
-		
-		// Make all other markers ModelRevolvers
-		for (int i = 2; i < 12; i++) { // for all other markers (#2 - #11)
+	}
+	
+	private void createModelRevolvers() {
+		// Make all other markers (#2 - #11) ModelRevolvers
+		for (int i = 2; i < 12; i++) {
 			InteractiveMarker marker = new InteractiveMarker();
 			ModelRevolver revolver = new ModelRevolver(marker);
 			marker.setPoseReceiver(poseReceivers[i]);
@@ -111,7 +118,6 @@ public class TowerDefense extends ThreeDUIApplication {
 			control.registerRevolver(revolver);
 			revolver.registerControl(control);
 		}
-		
 	}
 	
 	private void registerModels() {
@@ -156,27 +162,13 @@ public class TowerDefense extends ThreeDUIApplication {
 			this.markerObjects[i].getTransformGroup().addChild(coordSys);
 		}
 	}
-
-	private void createTowersOnMarkers() {
-		
-		CannonTower c1 = new CannonTower(CannonTower.Type.GUN);
-		CannonTower c2 = new CannonTower(CannonTower.Type.DOUBLEGUN);
-		CannonTower c3 = new CannonTower(CannonTower.Type.PRECISION);
-		CannonTower c4 = new CannonTower(CannonTower.Type.GATLING);
-		
-//		this.markerObjects[0].getTransformGroup().addChild(c1);
-		this.markerObjects[1].getTransformGroup().addChild(c2);
-		this.markerObjects[2].getTransformGroup().addChild(c3);
-		this.markerObjects[3].getTransformGroup().addChild(c4);
-		
-	}
 	
 	/**
 	 * Example code: Print in console whenever marker 0x0272 is changed. Output its translation.
 	 */
 	@Override
 	public void onPoseChange(TransformableObject pose) {
-		
+/*		
 		if (pose.equals(this.markerObjects[0])) {
 			Transform3D trans = new Transform3D();
 			pose.getTransformGroup().getTransform(trans);
@@ -186,7 +178,7 @@ public class TowerDefense extends ThreeDUIApplication {
 			
 //			System.out.println("Tracked Marker 0x0272. X: " + pos.x + ", Y: " + pos.y + ", Z: " + pos.z);
 		}
-		
+		*/
 	}
 
 }
