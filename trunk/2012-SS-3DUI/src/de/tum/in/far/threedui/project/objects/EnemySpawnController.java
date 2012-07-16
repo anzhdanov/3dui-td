@@ -16,6 +16,7 @@ public class EnemySpawnController  extends Behavior{
 	
 	private static EnemySpawnController instance = null;
 	private WakeupCondition condition;
+	private int lastSpawn = 2000;
 	
 	
 	private EnemySpawnController()
@@ -25,6 +26,7 @@ public class EnemySpawnController  extends Behavior{
 	
 	public static EnemySpawnController getInstance()
 	{
+		
 	
 		
 		if(instance == null)
@@ -46,18 +48,18 @@ public class EnemySpawnController  extends Behavior{
 
 	@Override
 	public void processStimulus(Enumeration arg0) {
+		lastSpawn -= 20;
+		if(lastSpawn <0) {
+			if(GameController.getInstance().enemyList.size()<3)
+			{
+				Enemy enemy = new Enemy(new GreenAppearance(),15000);
+				GameController.getInstance().enemyList.add(enemy);
+				GameController.getInstance().pathObject.attachEnemy(enemy);
+				
+			}
 		
-	
-		
-		if(GameController.getInstance().enemyList.size()<3)
-		{
-			Enemy enemy = new Enemy(new GreenAppearance(),15000);
-			GameController.getInstance().enemyList.add(enemy);
-			GameController.getInstance().pathObject.attachEnemy(enemy);
-			
+			lastSpawn = 2000;
 		}
-	
-		
 		
 		wakeupOn(condition);
 	}

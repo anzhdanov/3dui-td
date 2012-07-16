@@ -99,6 +99,10 @@ public class PathObject extends TransformableObject {
 		
 		
 		tPath = new TransformGroup();
+		
+		tPath.setCapability(TransformGroup.ALLOW_CHILDREN_WRITE);
+		tPath.setCapability(TransformGroup.ALLOW_CHILDREN_EXTEND);
+		
 		tPath.setTransform(trans2);
 		tPath.addChild(bGroup);
 		

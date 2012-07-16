@@ -150,36 +150,44 @@ public class CannonTowerController extends Behavior{
 			
 		//	System.out.println("NUmber of Particles: "+ projectileList.size());
 			
+			LinkedList<Enemy> enemyList = GameController.getInstance().enemyList;
 			
-			for(Enemy e:GameController.getInstance().enemyList)
-			{
-				Vector3f enemyPos = new Vector3f();
-				Transform3D transEnemy = new Transform3D();
-				e.getLocalToVworld(transEnemy);
-				transEnemy.get(enemyPos);
-				
-				Vector3f particlePos = new Vector3f();
-				Transform3D transParticle = new Transform3D();
-				p.getLocalToVworld(transParticle);
-				transParticle.get(particlePos);
-				
-				Vector3f distance = new Vector3f();
-				distance.sub(enemyPos,particlePos);
-				
-				//System.out.println(distance.length());
-				if(distance.length()<0.03f)
+			synchronized(enemyList) {
+			
+				for(Iterator<Enemy> i = enemyList.iterator(); i.hasNext(); )
+//				for(Enemy e:GameController.getInstance().enemyList)
 				{
-					System.out.println("hit with Particle nr. " +projectileList.indexOf(p)+ " and " +e.name);
+					Enemy e = i.next();
+					Vector3f enemyPos = new Vector3f();
+					Transform3D transEnemy = new Transform3D();
 					
-				
-						//Remove enemy when hit;
+					e.getLocalToVworld(transEnemy);
+					transEnemy.get(enemyPos);
 					
-					e:GameController.getInstance().enemyList.remove(e);
+					Vector3f particlePos = new Vector3f();
+					Transform3D transParticle = new Transform3D();
+					p.getLocalToVworld(transParticle);
+					transParticle.get(particlePos);
+					
+					Vector3f distance = new Vector3f();
+					distance.sub(enemyPos,particlePos);
+					
+					//System.out.println(distance.length());
+					if(distance.length()<0.03f)
+					{
+						System.out.println("hit with Particle nr. " +projectileList.indexOf(p)+ " and " +e.name);
+						
+					
+							//Remove enemy when hit;
+						e.animation.detach();
+						i.remove();
+//						GameController.getInstance().enemyList.remove(e);
+					}
+					
+					
+					
+					
 				}
-				
-				
-				
-				
 			}
 		}
 		

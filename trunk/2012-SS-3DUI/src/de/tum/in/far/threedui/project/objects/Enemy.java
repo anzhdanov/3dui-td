@@ -37,7 +37,8 @@ public class Enemy extends TransformableObject {
 	
 	public Enemy(Appearance app, float speed) {
 		
-				
+		this.setCapability(BranchGroup.ALLOW_DETACH);
+		
 		this.speed = speed;
 	
 		Sphere s = new Sphere(0.01f,app);

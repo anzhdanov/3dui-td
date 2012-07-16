@@ -19,6 +19,7 @@ import de.tum.in.far.threedui.project.control.ModelRevolver;
 import de.tum.in.far.threedui.project.core.ModelLoader.ModelFormat;
 import de.tum.in.far.threedui.project.objects.CannonTower;
 import de.tum.in.far.threedui.project.objects.CoordSysObject;
+import de.tum.in.far.threedui.project.objects.EnemySpawnController;
 import de.tum.in.far.threedui.project.objects.GameController;
 import de.tum.in.far.threedui.project.objects.IconDisplay;
 import de.tum.in.far.threedui.project.objects.PathObject;
@@ -77,6 +78,7 @@ public class TowerDefense extends ThreeDUIApplication {
 		createGameField();
 		createController();
 		createModelRevolvers();
+		
 	}
 	
 	private void createGameField() {
@@ -90,8 +92,11 @@ public class TowerDefense extends ThreeDUIApplication {
 
 		pathObject.getTransformGroup().addChild(GameController.getInstance().particleGroup);
 		GameController.getInstance().pathObject = pathObject;
+		EnemySpawnController eSpawn = EnemySpawnController.getInstance();
+		pathObject.addChild(eSpawn);
 		
 		this.markerObjects[0].getTransformGroup().addChild(pathObject);
+
 	}
 	
 	private void createController() {
