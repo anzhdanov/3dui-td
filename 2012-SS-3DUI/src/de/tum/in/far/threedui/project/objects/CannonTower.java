@@ -207,6 +207,9 @@ public class CannonTower extends TransformableObject{
 		Point3f position = new Point3f();
 		bGroup.getLocalToVworld(t3d);
 		
+
+		Vector3f defaultDir = new Vector3f(0.0f,-1.0f,0.0f);
+		
 		
 		t3d.invert(); //Get the World to Local Matrix
 		t3d.transform(aimPoint); //AImpoint is now in local coordinate system
@@ -226,19 +229,22 @@ public class CannonTower extends TransformableObject{
 		dir2.y = dirVector.y;
 		dir2.z = 0;
 		
+		//bekomme drehung
 
-		float angle_elev = dir2.angle(dirVector);
+		float angle_rot = dir2.angle(defaultDir);
 		
 		Vector3f current = new Vector3f(0.0f,-1.0f,0.0f);
-
-		float angle_rot = current.angle(dirVector);
-		//System.out.println("Angle: "+angle_rot);
+		
+		Transform3D rotate = new Transform3D();
+		rotate.rotZ(angle_rot);
+		rotate.transform(defaultDir);
+		
+		float angle_elev = dirVector.angle(defaultDir);
+		
 
 		if(Float.isNaN(angle_rot)) angle_rot = 0;
 		if(Float.isNaN(angle_elev)) angle_elev = 0;
 		
-		if(aimPoint.x<0) angle_rot *= -1;
-		if(aimPoint.z>position.z) angle_elev *= -1;
 		
 		setTurretAngle(angle_rot);
 		setBarrelElevation(angle_elev);
@@ -279,27 +285,30 @@ public class CannonTower extends TransformableObject{
 	public Vector3f getAimVector()
 	{
 		
-		/*Vector3f v = new Vector3f(0.0f,-1.0f,0.0f);
+		Vector3f v = new Vector3f(0.0f,-1.0f,0.0f);
 
 		barrelElevation.rotX(barrelAngle);
 		barrelElevation.transform(v);
 		turretRotation.rotZ(turretAngle);
 		turretRotation.transform(v);
 		
-		*/
+		return v;
 //		System.out.println(v);
+		/*
 		
 		Transform3D t3d = new Transform3D();
 		Vector3f currentPos = new Vector3f();
 		this.getLocalToVworld(t3d);
 		t3d.get(currentPos);
 		
+		
+		
 		Vector3f v = new Vector3f();
 		v.sub(aimPoint,currentPos);
 		
 		return v;
 		
-		
+		*/
 	}
 	public float getProjectileLifetime()
 	{
