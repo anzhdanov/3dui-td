@@ -106,6 +106,7 @@ public class PathObject extends TransformableObject {
 		Point3f a[] = this.getWayPoints();
 
 		Enemy e1 = new Enemy(new RedAppearance(),7000);
+		e1.name = "Enemy 1";
 		
 		GameController.getInstance().enemyList.add(e1);
 	
@@ -119,6 +120,7 @@ public class PathObject extends TransformableObject {
 		GameController.getInstance().enemyList.add(e2);
 		//AnimationPosition anim2 = new AnimationPosition(e2);
 		e2.setPath(this.getWayPoints());
+		e2.name = "Enemy 2";
 		tPath.addChild(e2.animation);
 		
 		Enemy e3 = new Enemy(new GreenAppearance(),20000);
@@ -126,6 +128,7 @@ public class PathObject extends TransformableObject {
 		GameController.getInstance().enemyList.add(e3);
 		//AnimationPosition anim3 = new AnimationPosition(e3);
 		e3.setPath(this.getWayPoints());
+		e3.name = "Enemy 3";
 		tPath.addChild(e3.animation);
 		
 		
