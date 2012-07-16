@@ -25,7 +25,7 @@ public class ControlImpl implements Control {
 	private int prevId = -1;
 
 	class SamplingThread extends Thread{
-		private static final int LAG = 70;
+		private static final int LAG = 150;
 		Transform3D currentT = new Transform3D();
 		StatStarter ss = new StatStarter();
 		boolean gathered = false;

@@ -37,8 +37,6 @@ public class TowerDefense extends ThreeDUIApplication {
 	private Button button;                       // button on controller
 	
 	private Control control;
-	private ModelRevolver modelRevolver;
-	private InteractiveMarker marker1;
 	// end of control objects
 	
 	// game objects
@@ -73,8 +71,50 @@ public class TowerDefense extends ThreeDUIApplication {
 	public void init() {
 		super.init();
 		
-		this.modelLoader = ModelLoader.getInstance();
+		registerModels();
 		
+		Appearance app = new BlueAppearance();
+		TransparencyAttributes ta = new TransparencyAttributes();
+		ta.setTransparency(0.5f);
+		ta.setTransparencyMode (TransparencyAttributes.BLENDED);
+		app.setTransparencyAttributes(ta);
+		pathObject = new PathObject(app);
+
+		pathObject.getTransformGroup().addChild(GameController.getInstance().particleGroup);
+		GameController.getInstance().pathObject = pathObject;
+		
+		// Marker #0: game field
+		this.markerObjects[0].getTransformGroup().addChild(pathObject);
+				
+//		createCoordsOnMarkers(); // debug
+//		createTowersOnMarkers();
+		
+		// Code taken from Alexander (control stuff)
+		BlueAppearance blueAppearance = new BlueAppearance();
+		RedAppearance redAppearance = new RedAppearance();
+
+		button = new CylinderSwitch(0.026f, 0.001f, blueAppearance, redAppearance);
+		controllerGroup.getTransformGroup().addChild(button);
+		iDisplay = new IconDisplay();
+		controllerGroup.getTransformGroup().addChild(iDisplay);
+
+		// Marker #1: controller
+		this.markerObjects[1].getTransformGroup().addChild(controllerGroup);
+		control = new ControlImpl(poseReceivers[1], button);
+		
+		// Make all other markers ModelRevolvers
+		for (int i = 2; i < 12; i++) { // for all other markers (#2 - #11)
+			InteractiveMarker marker = new InteractiveMarker();
+			ModelRevolver revolver = new ModelRevolver(marker);
+			marker.setPoseReceiver(poseReceivers[i]);
+			this.markerObjects[i].getTransformGroup().addChild(marker);
+			control.registerRevolver(revolver);
+			revolver.registerControl(control);
+		}
+		
+	}
+	
+	private void registerModels() {
 		// Register individual gun parts
 		this.modelLoader.registerModel("Gun-Top", "gun-top.wrl", ModelFormat.VRML97);
 		this.modelLoader.registerModel("Gun-Base", "gun-base.wrl", ModelFormat.VRML97);
@@ -96,6 +136,8 @@ public class TowerDefense extends ThreeDUIApplication {
 		this.modelLoader.registerModel("Howitzer-Base", "howitzer-base.wrl", ModelFormat.VRML97);
 		this.modelLoader.registerModel("Howitzer-Barrel", "howitzer-barrel.wrl", ModelFormat.VRML97);
 		
+		// TODO StunAntenna parts?
+		
 		// Register complete gun models (miniature icons for selection)
 		this.modelLoader.registerModel("Howitzer", "howitzer.wrl");
 		this.modelLoader.registerModel("Precision", "precision.wrl");
@@ -103,77 +145,29 @@ public class TowerDefense extends ThreeDUIApplication {
 		this.modelLoader.registerModel("DoubleGun", "doublegun.wrl");
 		this.modelLoader.registerModel("Gatling", "gatling.wrl");
 		this.modelLoader.registerModel("StunAntenna", "stunantenna.wrl");
-
-		
-		Appearance app = new BlueAppearance();
-		TransparencyAttributes ta = new TransparencyAttributes();
-		ta.setTransparency(0.5f);
-		ta.setTransparencyMode (TransparencyAttributes.BLENDED);
-		app.setTransparencyAttributes(ta);
-		pathObject = new PathObject(app);
-
-		pathObject.getTransformGroup().addChild(GameController.getInstance().particleGroup);
-		GameController.getInstance().pathObject = pathObject;
-		
-		this.markerObject1.getTransformGroup().addChild(pathObject);
-				
-		createCoordsOnMarkers();
-		createTowersOnMarkers();
-		
-		// Code taken from Alexander (control stuff)
-		BlueAppearance blueAppearance = new BlueAppearance();
-		RedAppearance redAppearance = new RedAppearance();
-
-		button = new CylinderSwitch(0.026f, 0.026f, blueAppearance, redAppearance);
-		controllerGroup.getTransformGroup().addChild(button);
-		iDisplay = new IconDisplay();
-		controllerGroup.getTransformGroup().addChild(iDisplay);
-
-		this.markerObject9.getTransformGroup().addChild(controllerGroup);
-
-		marker1 = new InteractiveMarker();
-		modelRevolver = new ModelRevolver(marker1);
-		marker1.setPoseReceiver(poseReceiver10);
-		this.markerObject10.getTransformGroup().addChild(marker1);
-
-		control = new ControlImpl(poseReceiver9, button);
-		control.registerRevolver(modelRevolver);
-		modelRevolver.registerControl(control);
-		
-		
-		
 	}
 
 	/**
-	 * Example code: Display coordinate systems on all markers
+	 * Display coordinate systems on all markers
 	 */
 	private void createCoordsOnMarkers() {
-		
-		CoordSysObject coordSys1 = new CoordSysObject(0.001f, 0.05f);
-		CoordSysObject coordSys2 = new CoordSysObject(0.001f, 0.05f);
-		CoordSysObject coordSys3 = new CoordSysObject(0.001f, 0.05f);
-		CoordSysObject coordSys4 = new CoordSysObject(0.001f, 0.05f);
-		
-		this.markerObject1.getTransformGroup().addChild(coordSys1);
-		this.markerObject2.getTransformGroup().addChild(coordSys2);
-		this.markerObject3.getTransformGroup().addChild(coordSys3);
-//		this.markerObject4.getTransformGroup().addChild(coordSys4);
-		
-		this.markerObject10.getTransformGroup().addChild(coordSys4);
-	
+		for (int i = 0; i < 12; i++) {
+			CoordSysObject coordSys = new CoordSysObject(0.001f, 0.05f);
+			this.markerObjects[i].getTransformGroup().addChild(coordSys);
+		}
 	}
 
 	private void createTowersOnMarkers() {
 		
-		CannonTower c = new CannonTower(CannonTower.Type.PRECISION);
 		CannonTower c1 = new CannonTower(CannonTower.Type.GUN);
-		CannonTower c3 = new CannonTower(CannonTower.Type.DOUBLEGUN);
+		CannonTower c2 = new CannonTower(CannonTower.Type.DOUBLEGUN);
+		CannonTower c3 = new CannonTower(CannonTower.Type.PRECISION);
 		CannonTower c4 = new CannonTower(CannonTower.Type.GATLING);
 		
-		this.markerObject2.getTransformGroup().addChild(c);
-		this.markerObject4.getTransformGroup().addChild(c1);
-		this.markerObject3.getTransformGroup().addChild(c3);
-		//this.pose0272.getTransformGroup().addChild(c4);
+//		this.markerObjects[0].getTransformGroup().addChild(c1);
+		this.markerObjects[1].getTransformGroup().addChild(c2);
+		this.markerObjects[2].getTransformGroup().addChild(c3);
+		this.markerObjects[3].getTransformGroup().addChild(c4);
 		
 	}
 	
@@ -183,43 +177,14 @@ public class TowerDefense extends ThreeDUIApplication {
 	@Override
 	public void onPoseChange(TransformableObject pose) {
 		
-		
-		
-		if (pose.equals(this.markerObject1)) {
+		if (pose.equals(this.markerObjects[0])) {
 			Transform3D trans = new Transform3D();
 			pose.getTransformGroup().getTransform(trans);
 			
 			Vector3f pos = new Vector3f();
 			trans.get(pos);
 			
-			//System.out.println("Tracked Marker 0x0272. X: " + pos.x + ", Y: " + pos.y + ", Z: " + pos.z);
-		}
-		else if (pose.equals(this.markerObject2)) {
-			Transform3D trans = new Transform3D();
-			pose.getTransformGroup().getTransform(trans);
-			
-			Vector3f pos = new Vector3f();
-			trans.get(pos);
-			
-			//System.out.println("Tracked Marker 0x0690. X: " + pos.x + ", Y: " + pos.y + ", Z: " + pos.z);
-		}
-		else if (pose.equals(this.markerObject3)) {
-			Transform3D trans = new Transform3D();
-			pose.getTransformGroup().getTransform(trans);
-			
-			Vector3f pos = new Vector3f();
-			trans.get(pos);
-			
-			//System.out.println("Tracked Marker 0x1228. X: " + pos.x + ", Y: " + pos.y + ", Z: " + pos.z);
-		}
-		else if (pose.equals(this.markerObject4)) {
-			Transform3D trans = new Transform3D();
-			pose.getTransformGroup().getTransform(trans);
-			
-			Vector3f pos = new Vector3f();
-			trans.get(pos);
-			
-			//System.out.println("Tracked Marker 0x0B44. X: " + pos.x + ", Y: " + pos.y + ", Z: " + pos.z);
+//			System.out.println("Tracked Marker 0x0272. X: " + pos.x + ", Y: " + pos.y + ", Z: " + pos.z);
 		}
 		
 	}

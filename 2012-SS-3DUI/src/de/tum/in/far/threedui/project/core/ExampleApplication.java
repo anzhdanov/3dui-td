@@ -42,25 +42,17 @@ public class ExampleApplication extends ThreeDUIApplication {
 	 * Example code: Display coordinate systems on all markers
 	 */
 	private void createCoordsOnMarkers() {
-		this.markerObject1.getTransformGroup().addChild(new CoordSysObject(0.001f, 0.05f));
-		this.markerObject2.getTransformGroup().addChild(new CoordSysObject(0.001f, 0.05f));
-		this.markerObject3.getTransformGroup().addChild(new CoordSysObject(0.001f, 0.05f));
-		this.markerObject4.getTransformGroup().addChild(new CoordSysObject(0.001f, 0.05f));
-		this.markerObject5.getTransformGroup().addChild(new CoordSysObject(0.001f, 0.05f));
-		this.markerObject6.getTransformGroup().addChild(new CoordSysObject(0.001f, 0.05f));
-		this.markerObject7.getTransformGroup().addChild(new CoordSysObject(0.001f, 0.05f));
-		this.markerObject8.getTransformGroup().addChild(new CoordSysObject(0.001f, 0.05f));
-		this.markerObject9.getTransformGroup().addChild(new CoordSysObject(0.001f, 0.05f));
-		this.markerObject10.getTransformGroup().addChild(new CoordSysObject(0.001f, 0.05f));
-		this.markerObject11.getTransformGroup().addChild(new CoordSysObject(0.001f, 0.05f));
-		this.markerObject12.getTransformGroup().addChild(new CoordSysObject(0.001f, 0.05f));
+		for (int i = 0; i < 12; i++) {
+			CoordSysObject coordSys = new CoordSysObject(0.001f, 0.05f);
+			this.markerObjects[i].getTransformGroup().addChild(coordSys);
+		}
 	}
 	
 	private void createSheepOnMarkers() {
 		TransformableObject sheep1 = this.modelLoader.getModelObject("Sheep");
 		TransformableObject sheep2 = this.modelLoader.getModelObject("Sheep");
-		this.markerObject1.getTransformGroup().addChild(sheep1);
-		this.markerObject3.getTransformGroup().addChild(sheep2);
+		this.markerObjects[0].getTransformGroup().addChild(sheep1);
+		this.markerObjects[2].getTransformGroup().addChild(sheep2);
 	}
 
 	/**
@@ -68,7 +60,7 @@ public class ExampleApplication extends ThreeDUIApplication {
 	 */
 	@Override
 	public void onPoseChange(TransformableObject pose) {
-		if (pose.equals(this.markerObject1)) {
+		if (pose.equals(this.markerObjects[0])) {
 			Transform3D trans = new Transform3D();
 			pose.getTransformGroup().getTransform(trans);
 			

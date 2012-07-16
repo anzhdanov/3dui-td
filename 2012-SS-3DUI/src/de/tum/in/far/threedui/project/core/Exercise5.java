@@ -1,17 +1,12 @@
 package de.tum.in.far.threedui.project.core;
 
 import javax.media.j3d.BoundingSphere;
-import javax.media.j3d.BranchGroup;
-import javax.media.j3d.TransformGroup;
-import javax.swing.ButtonGroup;
 import javax.vecmath.Point3d;
 
 import de.tum.in.far.threedui.general.BackgroundObject;
 import de.tum.in.far.threedui.general.BinaryEnv;
 import de.tum.in.far.threedui.general.BlueAppearance;
 import de.tum.in.far.threedui.general.ImageReceiver;
-import de.tum.in.far.threedui.general.ModelObject;
-import de.tum.in.far.threedui.general.PoseReceiver;
 import de.tum.in.far.threedui.general.RedAppearance;
 import de.tum.in.far.threedui.general.TransformableObject;
 import de.tum.in.far.threedui.general.UbitrackFacade;
@@ -19,38 +14,14 @@ import de.tum.in.far.threedui.general.ViewerUbitrack;
 import de.tum.in.far.threedui.project.control.Button;
 import de.tum.in.far.threedui.project.control.Control;
 import de.tum.in.far.threedui.project.control.ControlImpl;
-import de.tum.in.far.threedui.project.control.CubeObject;
-import de.tum.in.far.threedui.project.control.CubeObjectParameter;
 import de.tum.in.far.threedui.project.control.CylinderSwitch;
 import de.tum.in.far.threedui.project.control.InteractiveMarker;
 import de.tum.in.far.threedui.project.control.ModelRevolver;
-import de.tum.in.far.threedui.project.core.ModelLoader.ModelFormat;
-//import de.tum.in.far.threedui.project.objects.GameController;
 import de.tum.in.far.threedui.project.objects.IconDisplay;
 
-/*
-import de.tum.in.far.threedui.control.general.BackgroundObject;
-import de.tum.in.far.threedui.control.general.BinaryEnv;
-import de.tum.in.far.threedui.control.general.BlueAppearance;
-import de.tum.in.far.threedui.control.general.Button;
-import de.tum.in.far.threedui.control.general.Control;
-import de.tum.in.far.threedui.control.general.ControlImpl;
-import de.tum.in.far.threedui.control.general.CubeObject;
-import de.tum.in.far.threedui.control.general.CubeObjectParameter;
-import de.tum.in.far.threedui.control.general.CylinderSwitch;
-import de.tum.in.far.threedui.control.general.ImageReceiver;
-import de.tum.in.far.threedui.control.general.InteractiveMarker;
-import de.tum.in.far.threedui.control.general.ModelObject;
-import de.tum.in.far.threedui.control.general.ModelRevolver;
-import de.tum.in.far.threedui.control.general.PoseReceiver;
-import de.tum.in.far.threedui.control.general.RedAppearance;
-import de.tum.in.far.threedui.control.general.UbitrackFacade;
-import de.tum.in.far.threedui.control.general.ViewerUbitrack;
-
-*/
 public class Exercise5 {
 
-	public static final String EXERCISE = "Exercise 4";
+	public static final String EXERCISE = "Controller Test";
 	protected BoundingSphere bounds = new BoundingSphere(new Point3d(0.0, 0.0,
 			0.0), 0.1);
 
@@ -64,10 +35,6 @@ public class Exercise5 {
 	private ViewerUbitrack viewer;
 	private UbitrackFacade ubitrackFacade;
 
-//	private CubeObject cubeObject;
-//	private GameController gameController;
-	private ModelObject sheepObject;
-	//private ModelObject marker1;
 	private InteractiveMarker marker1;
 	private InteractiveMarker marker2;
 	private Button button;
@@ -83,13 +50,13 @@ public class Exercise5 {
 	}
 
 	public static void main(String[] args) {
-		Exercise5 exercise3 = new Exercise5();
+		Exercise5 exercise5 = new Exercise5();
 
-		exercise3.loadModels();
+		exercise5.loadModels();
 	
-		exercise3.initializeJava3D();
-		exercise3.initMarkers();
-		exercise3.initializeUbitrack();
+		exercise5.initializeJava3D();
+		exercise5.initMarkers();
+		exercise5.initializeUbitrack();
 		
 	}
 
@@ -130,7 +97,6 @@ public class Exercise5 {
 		marker1.setPoseReceiver(poseReceiver2);
 		marker2.setPoseReceiver(poseReceiver4);
 		
-		//MovementWrapperImpl mWrapper = new MovementWrapperImpl(marker1, sheepObject);
 		control = new ControlImpl(poseReceiver, button);
 		control.registerRevolver(modelRevolver);
 		modelRevolver.registerControl(control);
@@ -138,20 +104,7 @@ public class Exercise5 {
 		control.registerRevolver(modelRevolver2);
 		modelRevolver2.registerControl(control);
 			
-		
-//		button = new ArrowSwitch(sheepObject);
-//		viewer.addObject(button);	
-//		poseReceiver3.setTransformGroup(button.getTransformGroup());
-		
 		ubitrackFacade.startDataflow();		
-		
-//		
-//		List<PoseReceiver> list = new ArrayList<PoseReceiver>();
-//		list.add(poseReceiver2);
-//		list.add(poseReceiver4);
-//		
-//		Operator adapter = new Operator(poseReceiver3, list, button);
-//		adapter.start();
 	}
 
 	private void loadModels() {
@@ -208,10 +161,6 @@ public class Exercise5 {
 		viewer = new ViewerUbitrack(EXERCISE, ubitrackFacade);
 
 		BlueAppearance blueAppearance = new BlueAppearance();
-
-//		cubeObject = new CubeObject(new CubeObjectParameter(blueAppearance, 0.023f, 0.023f, 0.023f));
-//		viewer.addObject(cubeObject);		
-		
 		RedAppearance redAppearance = new RedAppearance();
 		
 		
