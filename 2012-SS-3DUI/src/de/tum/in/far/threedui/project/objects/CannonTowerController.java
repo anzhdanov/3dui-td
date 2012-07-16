@@ -143,9 +143,12 @@ public class CannonTowerController extends Behavior{
 
 		
 		
+		//Collision
 		for(Projectile p:projectileList)
 		{
 			p.updateProjectile();
+			
+		//	System.out.println("NUmber of Particles: "+ projectileList.size());
 			
 			
 			for(Enemy e:GameController.getInstance().enemyList)
@@ -154,6 +157,27 @@ public class CannonTowerController extends Behavior{
 				Transform3D transEnemy = new Transform3D();
 				e.getLocalToVworld(transEnemy);
 				transEnemy.get(enemyPos);
+				
+				Vector3f particlePos = new Vector3f();
+				Transform3D transParticle = new Transform3D();
+				p.getLocalToVworld(transParticle);
+				transParticle.get(particlePos);
+				
+				Vector3f distance = new Vector3f();
+				distance.sub(enemyPos,particlePos);
+				
+				//System.out.println(distance.length());
+				if(distance.length()<0.03f)
+				{
+					System.out.println("hit with Particle nr. " +projectileList.indexOf(p)+ " and " +e.name);
+					
+				
+						//Remove enemy when hit;
+					
+					e:GameController.getInstance().enemyList.remove(e);
+				}
+				
+				
 				
 				
 			}

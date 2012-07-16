@@ -29,7 +29,8 @@ public class Enemy extends TransformableObject {
 	public float speed = 10000;
 	
 	public AnimationPosition animation;
-
+	
+	public String name = "test";
 	
 	public Enemy(Appearance app, float speed) {
 		
