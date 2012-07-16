@@ -32,6 +32,9 @@ public class Enemy extends TransformableObject {
 	
 	public String name = "test";
 	
+	
+	
+	
 	public Enemy(Appearance app, float speed) {
 		
 				
@@ -45,6 +48,8 @@ public class Enemy extends TransformableObject {
 		
 		
 	}
+
+
 	
 	public void setPath(Point3f[] posList)
 	{
