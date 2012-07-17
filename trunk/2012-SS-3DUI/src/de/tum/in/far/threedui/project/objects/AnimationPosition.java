@@ -1,4 +1,4 @@
-package de.tum.in.far.threedui.project.core;
+package de.tum.in.far.threedui.project.objects;
 
 import javax.media.j3d.Alpha;
 import javax.media.j3d.BoundingSphere;
@@ -13,7 +13,6 @@ import javax.vecmath.Quat4f;
 import javax.vecmath.Tuple3f;
 import javax.vecmath.Vector3d;
 
-import de.tum.in.far.threedui.project.objects.Enemy;
 
 public class AnimationPosition extends BranchGroup {
 

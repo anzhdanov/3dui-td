@@ -1,4 +1,4 @@
-package de.tum.in.far.threedui.project.objects;
+package de.tum.in.far.threedui.project.gamelogic;
 
 import java.util.Enumeration;
 
@@ -11,6 +11,7 @@ import javax.media.j3d.WakeupOnElapsedTime;
 import javax.media.j3d.WakeupOr;
 
 import de.tum.in.far.threedui.general.GreenAppearance;
+import de.tum.in.far.threedui.project.objects.Enemy;
 
 public class EnemySpawnController  extends Behavior{
 	

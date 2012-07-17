@@ -1,4 +1,4 @@
-package de.tum.in.far.threedui.project.objects;
+package de.tum.in.far.threedui.project.gamelogic;
 
 import java.util.Enumeration;
 import java.util.Iterator;
@@ -15,6 +15,9 @@ import javax.vecmath.Point3f;
 import javax.vecmath.Vector3f;
 
 import de.tum.in.far.threedui.project.core.TowerDefense;
+import de.tum.in.far.threedui.project.objects.CannonTower;
+import de.tum.in.far.threedui.project.objects.Enemy;
+import de.tum.in.far.threedui.project.objects.Projectile;
 
 public class CannonTowerController extends Behavior{
 

@@ -24,7 +24,6 @@ import de.tum.in.far.threedui.general.BlueAppearance;
 import de.tum.in.far.threedui.general.GreenAppearance;
 import de.tum.in.far.threedui.general.RedAppearance;
 import de.tum.in.far.threedui.general.TransformableObject;
-import de.tum.in.far.threedui.project.core.AnimationPosition;
 
 public class PathObject extends TransformableObject {
 	
