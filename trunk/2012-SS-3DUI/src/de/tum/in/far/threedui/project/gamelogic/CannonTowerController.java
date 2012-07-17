@@ -26,7 +26,6 @@ public class CannonTowerController extends Behavior{
 	private float elevation = 0.0f;
 	private CannonTower tower;
 	private boolean up = true;
-	private int shotFrequency = 4;
 	private int lastShot = 0;
 	public LinkedList<Projectile> projectileList;
 	
@@ -115,7 +114,7 @@ public class CannonTowerController extends Behavior{
 		
 		
 		lastShot++;
-		if(lastShot >= shotFrequency)
+		if(lastShot >= tower.getFireRate())
 		{
 //			System.out.println("Fireing");
 			
