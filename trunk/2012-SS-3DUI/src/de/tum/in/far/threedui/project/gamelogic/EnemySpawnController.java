@@ -13,30 +13,34 @@ import javax.vecmath.Color3f;
 import de.tum.in.far.threedui.project.EnemyAppearance;
 import de.tum.in.far.threedui.project.objects.Enemy;
 
-public class EnemySpawnController  extends Behavior{
+public class EnemySpawnController extends Behavior{
 	
 	private static EnemySpawnController instance = null;
 	private WakeupCondition condition;
-	private int lastSpawn = 2000;
+	private int spawnDelay = 5000;
+	private int nextSpawn = 5000;
 	
 	
-	private EnemySpawnController()
+	private EnemySpawnController(int spawnDelay)
 	{
-
+		this.spawnDelay = spawnDelay;
+		this.nextSpawn = spawnDelay;
 	}
 	
 	public static EnemySpawnController getInstance()
 	{
-		
-	
-		
 		if(instance == null)
 		{
-			instance = new EnemySpawnController();
+			instance = new EnemySpawnController(4000);
 		}
 		return instance;
 	}
 
+	public void setSpawnDelay(int spawnDelay)
+	{
+		this.spawnDelay = spawnDelay;
+	}
+	
 	@Override
 	public void initialize() {
 		BoundingSphere bounds = new BoundingSphere();
@@ -49,16 +53,13 @@ public class EnemySpawnController  extends Behavior{
 
 	@Override
 	public void processStimulus(Enumeration arg0) {
-		lastSpawn -= 20;
-		if(lastSpawn <0) {
-			if(GameController.getInstance().enemyList.size()<3)
-			{
-				Enemy enemy = new Enemy(new EnemyAppearance(new Color3f(0.3f, 0.8f, 0.3f)), 15000, 10);
-				GameController.getInstance().enemyList.add(enemy);
-				enemy.attachToPath(GameController.getInstance().pathObject);
-			}
+		nextSpawn -= 20;
+		if(nextSpawn <0) {
+			Enemy enemy = new Enemy(new EnemyAppearance(new Color3f(0.3f, 0.8f, 0.3f)), 15000, 10);
+			GameController.getInstance().enemyList.add(enemy);
+			enemy.attachToPath(GameController.getInstance().pathObject);
 		
-			lastSpawn = 2000;
+			nextSpawn = spawnDelay;
 		}
 		
 		wakeupOn(condition);

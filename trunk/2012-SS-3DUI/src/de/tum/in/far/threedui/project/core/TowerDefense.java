@@ -91,6 +91,7 @@ public class TowerDefense extends ThreeDUIApplication {
 		pathObject.addChild(eSpawn);
 		
 		this.markerObjects[0].getTransformGroup().addChild(pathObject);
+		this.markerObjects[0].getTransformGroup().addChild(GameController.getInstance());
 
 	}
 	
