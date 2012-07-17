@@ -4,13 +4,13 @@ import java.util.Enumeration;
 
 import javax.media.j3d.Behavior;
 import javax.media.j3d.BoundingSphere;
-import javax.media.j3d.TransformGroup;
 import javax.media.j3d.WakeupCondition;
 import javax.media.j3d.WakeupCriterion;
 import javax.media.j3d.WakeupOnElapsedTime;
 import javax.media.j3d.WakeupOr;
+import javax.vecmath.Color3f;
 
-import de.tum.in.far.threedui.general.GreenAppearance;
+import de.tum.in.far.threedui.project.EnemyAppearance;
 import de.tum.in.far.threedui.project.objects.Enemy;
 
 public class EnemySpawnController  extends Behavior{
@@ -53,7 +53,7 @@ public class EnemySpawnController  extends Behavior{
 		if(lastSpawn <0) {
 			if(GameController.getInstance().enemyList.size()<3)
 			{
-				Enemy enemy = new Enemy(new GreenAppearance(), 15000, 5);
+				Enemy enemy = new Enemy(new EnemyAppearance(new Color3f(0.3f, 0.8f, 0.3f)), 15000, 10);
 				GameController.getInstance().enemyList.add(enemy);
 				enemy.attachToPath(GameController.getInstance().pathObject);
 			}

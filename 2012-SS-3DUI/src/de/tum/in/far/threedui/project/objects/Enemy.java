@@ -4,29 +4,35 @@ import javax.media.j3d.Appearance;
 import javax.media.j3d.BranchGroup;
 import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransformGroup;
-import javax.vecmath.Point3f;
+import javax.media.j3d.TransparencyAttributes;
 import javax.vecmath.Vector3f;
 
 import com.sun.j3d.utils.geometry.Sphere;
 
 import de.tum.in.far.threedui.general.TransformableObject;
+import de.tum.in.far.threedui.project.EnemyAppearance;
 
 public class Enemy extends TransformableObject {
 
 	
 	private AnimationPosition animation;
+	private EnemyAppearance app;
 	
 	public String name = "UnnamedEnemy";
 	
 	private float speed = 10000;
-	private int health = 5;
+	private int maxHealth = 5;
+	private int currentHealth = 5;
 	
-	public Enemy(Appearance app, float speed, int health) {
-		
+	public Enemy(EnemyAppearance app, float speed, int health) {
 		this.setCapability(BranchGroup.ALLOW_DETACH);
+		app.setCapability(Appearance.ALLOW_TRANSPARENCY_ATTRIBUTES_WRITE);
 		
+		this.app = app;
 		this.speed = speed;
-	
+		this.maxHealth = health;
+		this.currentHealth = health;
+		
 		Transform3D trans = new Transform3D();
 		trans.setTranslation(new Vector3f(0, 0, 0.01f));
 		TransformGroup sphereTransGroup = new TransformGroup(trans);
@@ -55,9 +61,12 @@ public class Enemy extends TransformableObject {
 	 */
 	public boolean damage()
 	{
-		health--;
-
-		if (health <= 0) {
+		this.currentHealth--;
+		
+		float factor = ((float)this.currentHealth) / this.maxHealth;
+		app.changeColor(factor);
+		
+		if (this.currentHealth <= 0) {
 			this.animation.detach();
 			return true;
 		}

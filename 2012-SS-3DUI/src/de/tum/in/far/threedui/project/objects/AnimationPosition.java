@@ -39,7 +39,7 @@ public class AnimationPosition extends BranchGroup {
 	    positions[1]= new Point3f(  0.0f, -0.5f, -0.07f);
 	    positions[2]= new Point3f( -0.1f,  0.0f, -0.02f);
 		
-		a = new Alpha(-1, (int)((Enemy)targetObject).getSpeed()); //-1=infinity and a rotation takes 3000ms
+		a = new Alpha(1, (int)((Enemy)targetObject).getSpeed()); //-1=infinity and a rotation takes 3000ms
 		a.setStartTime(System.currentTimeMillis() + 50);
 		axis = new Transform3D();
 		axis.set(new Vector3d(0.0f,0.0f,1.0f));
