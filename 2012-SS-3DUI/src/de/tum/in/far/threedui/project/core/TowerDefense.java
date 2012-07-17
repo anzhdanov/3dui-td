@@ -1,9 +1,7 @@
 package de.tum.in.far.threedui.project.core;
 
 import javax.media.j3d.Appearance;
-import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransparencyAttributes;
-import javax.vecmath.Vector3f;
 
 import de.tum.in.far.threedui.general.BlueAppearance;
 import de.tum.in.far.threedui.general.RedAppearance;
@@ -11,13 +9,10 @@ import de.tum.in.far.threedui.general.TransformableObject;
 import de.tum.in.far.threedui.project.control.Button;
 import de.tum.in.far.threedui.project.control.Control;
 import de.tum.in.far.threedui.project.control.ControlImpl;
-import de.tum.in.far.threedui.project.control.CubeObject;
-import de.tum.in.far.threedui.project.control.CubeObjectParameter;
 import de.tum.in.far.threedui.project.control.CylinderSwitch;
 import de.tum.in.far.threedui.project.control.InteractiveMarker;
 import de.tum.in.far.threedui.project.control.ModelRevolver;
 import de.tum.in.far.threedui.project.core.ModelLoader.ModelFormat;
-import de.tum.in.far.threedui.project.objects.CannonTower;
 import de.tum.in.far.threedui.project.objects.CoordSysObject;
 import de.tum.in.far.threedui.project.objects.EnemySpawnController;
 import de.tum.in.far.threedui.project.objects.GameController;

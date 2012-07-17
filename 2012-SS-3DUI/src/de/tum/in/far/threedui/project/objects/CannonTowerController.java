@@ -120,7 +120,7 @@ public class CannonTowerController extends Behavior{
 			aimVector.scale(tower.getProjectileSpeed());
 			
 			
-			Projectile p = new Projectile(tower.getBarrelTipAsWorldCoords(),aimVector, tower.getProjectileLifetime());
+			Projectile p = new Projectile(tower.getBarrelTip(),aimVector, tower.getProjectileLifetime());
 		projectileList.add(p);
 		tower.addChild(p);
 		lastShot=0;
@@ -155,25 +155,26 @@ public class CannonTowerController extends Behavior{
 			synchronized(enemyList) {
 			
 				for(Iterator<Enemy> i = enemyList.iterator(); i.hasNext(); )
-//				for(Enemy e:GameController.getInstance().enemyList)
 				{
 					Enemy e = i.next();
 					Vector3f enemyPos = new Vector3f();
 					Transform3D transEnemy = new Transform3D();
 					
-					e.getLocalToVworld(transEnemy);
+					e.getTransformGroup().getLocalToVworld(transEnemy);
 					transEnemy.get(enemyPos);
 					
 					Vector3f particlePos = new Vector3f();
 					Transform3D transParticle = new Transform3D();
-					p.getLocalToVworld(transParticle);
+					p.getGlobalCoords(transParticle);
 					transParticle.get(particlePos);
+					
+					System.out.println("particle: " + particlePos);
 					
 					Vector3f distance = new Vector3f();
 					distance.sub(enemyPos,particlePos);
 					
-					//System.out.println(distance.length());
-					if(distance.length()<0.03f)
+					System.out.println(projectileList.indexOf(p) + " .. " + distance.length());
+					if(distance.length()<0.025f)
 					{
 						System.out.println("hit with Particle nr. " +projectileList.indexOf(p)+ " and " +e.name);
 						

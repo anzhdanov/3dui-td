@@ -21,17 +21,13 @@ public class Projectile extends TransformableObject{
 	private float lifeTime;
 	private float damage;
 	
+	private SphereObject s;
 	
 	public Projectile(Vector3f pos, Vector3f vel, float lifeTime)
 	{
 		
 
 		this.setCapability(BranchGroup.ALLOW_DETACH);
-		
-		Transform3D t3d = new Transform3D();
-		GameController.getInstance().pathObject.getLocalToVworld(t3d);
-		t3d.invert();
-		t3d.transform(pos);
 		
 		this.position = pos;
 		this.velocity = vel;
@@ -57,7 +53,7 @@ public class Projectile extends TransformableObject{
 		*/
 		
 		
-		SphereObject s = new SphereObject(0.004f);
+		s = new SphereObject(0.004f);
 		transGroup.addChild(s);
 		}
 	
@@ -81,6 +77,11 @@ public class Projectile extends TransformableObject{
 	{
 		if(this.lifeTime>0)return true;
 		else return false;
+	}
+	
+	public void getGlobalCoords(Transform3D trans)
+	{
+		s.getLocalToVworld(trans);
 	}
 	
 
