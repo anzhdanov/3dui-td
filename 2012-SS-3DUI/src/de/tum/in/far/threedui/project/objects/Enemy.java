@@ -10,7 +10,6 @@ import javax.vecmath.Vector3f;
 import com.sun.j3d.utils.geometry.Sphere;
 
 import de.tum.in.far.threedui.general.TransformableObject;
-import de.tum.in.far.threedui.project.core.AnimationPosition;
 
 public class Enemy extends TransformableObject {
 

@@ -1,4 +1,4 @@
-package de.tum.in.far.threedui.project.objects;
+package de.tum.in.far.threedui.project.gamelogic;
 
 import java.util.LinkedList;
 
@@ -14,6 +14,8 @@ import javax.vecmath.Vector3f;
 
 import de.tum.in.far.threedui.general.BlueAppearance;
 import de.tum.in.far.threedui.general.TransformableObject;
+import de.tum.in.far.threedui.project.objects.Enemy;
+import de.tum.in.far.threedui.project.objects.PathObject;
 
 public class GameController extends TransformableObject{
 	

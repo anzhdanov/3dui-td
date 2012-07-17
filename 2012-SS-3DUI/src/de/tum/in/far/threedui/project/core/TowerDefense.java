@@ -13,9 +13,9 @@ import de.tum.in.far.threedui.project.control.CylinderSwitch;
 import de.tum.in.far.threedui.project.control.InteractiveMarker;
 import de.tum.in.far.threedui.project.control.ModelRevolver;
 import de.tum.in.far.threedui.project.core.ModelLoader.ModelFormat;
+import de.tum.in.far.threedui.project.gamelogic.EnemySpawnController;
+import de.tum.in.far.threedui.project.gamelogic.GameController;
 import de.tum.in.far.threedui.project.objects.CoordSysObject;
-import de.tum.in.far.threedui.project.objects.EnemySpawnController;
-import de.tum.in.far.threedui.project.objects.GameController;
 import de.tum.in.far.threedui.project.objects.IconDisplay;
 import de.tum.in.far.threedui.project.objects.PathObject;
 

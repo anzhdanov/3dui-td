@@ -9,6 +9,7 @@ import javax.vecmath.Vector3f;
 import de.tum.in.far.threedui.general.TransformableObject;
 import de.tum.in.far.threedui.project.AngularCoords;
 import de.tum.in.far.threedui.project.core.ModelLoader;
+import de.tum.in.far.threedui.project.gamelogic.CannonTowerController;
 
 public class CannonTower extends TransformableObject{
 	
