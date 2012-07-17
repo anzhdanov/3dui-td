@@ -106,46 +106,10 @@ public class PathObject extends TransformableObject {
 		tPath.setTransform(trans2);
 		tPath.addChild(bGroup);
 		
-		
-		
 		markerGroup = new BranchGroup();
-		
-		Point3f a[] = this.getWayPoints();
-
-		Enemy e1 = new Enemy(new RedAppearance(),7000);
-		e1.name = "Enemy 1";
-		
-		GameController.getInstance().enemyList.add(e1);
-	
-		//AnimationPosition anim = new AnimationPosition(e1);
-		e1.setPath(this.getWayPoints());
-		tPath.addChild(e1.animation);
-		
-		
-		Enemy e2 = new Enemy(new BlueAppearance(),15000);
-
-		GameController.getInstance().enemyList.add(e2);
-		//AnimationPosition anim2 = new AnimationPosition(e2);
-		e2.setPath(this.getWayPoints());
-		e2.name = "Enemy 2";
-		tPath.addChild(e2.animation);
-		
-		Enemy e3 = new Enemy(new GreenAppearance(),20000);
-
-		GameController.getInstance().enemyList.add(e3);
-		//AnimationPosition anim3 = new AnimationPosition(e3);
-		e3.setPath(this.getWayPoints());
-		e3.name = "Enemy 3";
-		tPath.addChild(e3.animation);
-		
-		
 		markerGroup.addChild(tPath);
-	
 		
 		transGroup.addChild(markerGroup);
-		
-		
-	
 	}
 	
 	public void attachEnemy(Enemy e)
@@ -212,7 +176,7 @@ public class PathObject extends TransformableObject {
 		int id = getStartPoint();
 		int x = id%xres;
 		int y = id/xres;
-		System.out.println("Point "+x+" "+y);
+//		System.out.println("Point "+x+" "+y);
 		
 		wayPoints.add(getPointFromCoord(x,y));
 		
@@ -232,7 +196,7 @@ public class PathObject extends TransformableObject {
 						direction = WEST;
 					}
 
-					System.out.println("Point "+x+" "+y);
+//					System.out.println("Point "+x+" "+y);
 					wayPoints.add(getPointFromCoord(x,y));
 				}
 				else
@@ -256,7 +220,7 @@ public class PathObject extends TransformableObject {
 						direction = NORTH;
 					}
 
-					System.out.println("Point "+x+" "+y);
+//					System.out.println("Point "+x+" "+y);
 					wayPoints.add(getPointFromCoord(x,y));
 					
 					
@@ -277,7 +241,7 @@ public class PathObject extends TransformableObject {
 					{
 						direction = WEST;
 					}
-					System.out.println("Point "+x+" "+y);
+//					System.out.println("Point "+x+" "+y);
 					wayPoints.add(getPointFromCoord(x,y));
 					
 					
@@ -298,7 +262,7 @@ public class PathObject extends TransformableObject {
 					{
 						direction = NORTH;
 					}
-					System.out.println("Point "+x+" "+y);
+//					System.out.println("Point "+x+" "+y);
 					wayPoints.add(getPointFromCoord(x,y));
 					
 					

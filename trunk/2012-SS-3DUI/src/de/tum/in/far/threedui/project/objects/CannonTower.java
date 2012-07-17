@@ -1,30 +1,14 @@
 package de.tum.in.far.threedui.project.objects;
 
-import java.awt.Font;
-import java.awt.Point;
-import java.util.Enumeration;
-
-import javax.media.j3d.Behavior;
-import javax.media.j3d.BoundingSphere;
 import javax.media.j3d.BranchGroup;
-import javax.media.j3d.Font3D;
-import javax.media.j3d.Geometry;
-import javax.media.j3d.OrientedShape3D;
-import javax.media.j3d.QuadArray;
 import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransformGroup;
-import javax.media.j3d.WakeupCondition;
-import javax.media.j3d.WakeupCriterion;
-import javax.media.j3d.WakeupOnElapsedTime;
-import javax.media.j3d.WakeupOr;
 import javax.vecmath.Point3f;
-import javax.vecmath.Vector3d;
 import javax.vecmath.Vector3f;
 
-import de.tum.in.far.threedui.general.BlueAppearance;
 import de.tum.in.far.threedui.general.TransformableObject;
+import de.tum.in.far.threedui.project.AngularCoords;
 import de.tum.in.far.threedui.project.core.ModelLoader;
-import de.tum.in.far.threedui.project.core.ModelLoader.ModelFormat;
 
 public class CannonTower extends TransformableObject{
 	
@@ -219,39 +203,11 @@ public class CannonTower extends TransformableObject{
 		
 		Vector3f dirVector = new Vector3f(aimPoint);
 		dirVector.sub(position);
-		dirVector.normalize(); //Now we've got the normalized direction
 		
-		//System.out.println("direction "+dirVector);
-		
+		AngularCoords ang = AngularCoords.fromVector(dirVector);
+		if (!Float.isNaN(ang.yaw)) setTurretAngle(ang.yaw);
+		if (!Float.isNaN(ang.pitch)) setBarrelElevation(-ang.pitch);
 
-		Vector3f dir2 = new Vector3f();
-		dir2.x = dirVector.x;
-		dir2.y = dirVector.y;
-		dir2.z = 0;
-		
-		//bekomme drehung
-
-		float angle_rot = dir2.angle(defaultDir);
-		
-		Vector3f current = new Vector3f(0.0f,-1.0f,0.0f);
-		
-		Transform3D rotate = new Transform3D();
-		rotate.rotZ(angle_rot);
-		rotate.transform(defaultDir);
-		
-		float angle_elev = dirVector.angle(defaultDir);
-		
-
-		if(Float.isNaN(angle_rot)) angle_rot = 0;
-		if(Float.isNaN(angle_elev)) angle_elev = 0;
-		
-		if(aimPoint.x<0) angle_rot *= -1;
-		if(aimPoint.z>position.z) angle_elev *= -1;
-		
-		setTurretAngle(angle_rot);
-		setBarrelElevation(angle_elev);
-		
-		
 	}
 
 
@@ -266,6 +222,7 @@ public class CannonTower extends TransformableObject{
 	
 	public void setBarrelElevation(float angle)
 	{
+		// TODO: add constraints here?
 		this.barrelAngle = angle;
 		Transform3D barrelTranslation = new Transform3D();
 		barrelTranslation.setTranslation(new Vector3f(0.0f,barrelYOffset,0.0f));
