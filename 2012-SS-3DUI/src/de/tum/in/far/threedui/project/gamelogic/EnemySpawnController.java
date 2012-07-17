@@ -53,10 +53,9 @@ public class EnemySpawnController  extends Behavior{
 		if(lastSpawn <0) {
 			if(GameController.getInstance().enemyList.size()<3)
 			{
-				Enemy enemy = new Enemy(new GreenAppearance(),15000);
+				Enemy enemy = new Enemy(new GreenAppearance(), 15000, 5);
 				GameController.getInstance().enemyList.add(enemy);
-				GameController.getInstance().pathObject.attachEnemy(enemy);
-				
+				enemy.attachToPath(GameController.getInstance().pathObject);
 			}
 		
 			lastSpawn = 2000;

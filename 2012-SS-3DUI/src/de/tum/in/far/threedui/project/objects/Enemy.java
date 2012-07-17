@@ -13,16 +13,15 @@ import de.tum.in.far.threedui.general.TransformableObject;
 
 public class Enemy extends TransformableObject {
 
-	public float speed = 10000;
 	
-	public AnimationPosition animation;
+	private AnimationPosition animation;
 	
-	public String name = "test";
+	public String name = "UnnamedEnemy";
 	
+	private float speed = 10000;
+	private int health = 5;
 	
-	
-	
-	public Enemy(Appearance app, float speed) {
+	public Enemy(Appearance app, float speed, int health) {
 		
 		this.setCapability(BranchGroup.ALLOW_DETACH);
 		
@@ -37,17 +36,32 @@ public class Enemy extends TransformableObject {
 		transGroup.addChild(sphereTransGroup);
 		
 		animation = new AnimationPosition(this);
-		
-		
-		
 	}
 
-
+	public void attachToPath(PathObject pathObject) {
+		animation.setPositions(pathObject.getWayPoints());
+		pathObject.attachToPath(this.animation);
+	}
 	
-	public void setPath(Point3f[] posList)
+	
+	public float getSpeed()
 	{
-		animation.setPositions(posList);
+		return this.speed;
 	}
-	
+
+	/**
+	 * Damage the enemy
+	 * @return true if enemy died
+	 */
+	public boolean damage()
+	{
+		health--;
+
+		if (health <= 0) {
+			this.animation.detach();
+			return true;
+		}
+		return false;
+	}
 
 }

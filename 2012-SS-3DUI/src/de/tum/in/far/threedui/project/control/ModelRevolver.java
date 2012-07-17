@@ -24,15 +24,19 @@ public class ModelRevolver {
 
 	public void displayModel(CannonTower.Type type)
 	{
-		if(currentDisplayed != null && currentDisplayed.getType() == type) return;
-		
-		if(currentDisplayed != null)
+		if(currentDisplayed != null) {
+			if (currentDisplayed.getType() == type) return;
+			
 			currentDisplayed.detach();
+			currentDisplayed = null;
+		}
 
-		CannonTower c = new CannonTower(type);
-		viewingWindow.getTransformGroup().addChild(c);
+		if (type != null) {
+			CannonTower c = new CannonTower(type);
+			viewingWindow.getTransformGroup().addChild(c);
 
-		currentDisplayed = c;
+			currentDisplayed = c;
+		}
 	}
 	
 	public void displayModel(int id){		

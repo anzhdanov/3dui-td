@@ -5,24 +5,15 @@ import java.util.LinkedList;
 import javax.media.j3d.Appearance;
 import javax.media.j3d.BranchGroup;
 import javax.media.j3d.GeometryArray;
+import javax.media.j3d.Node;
 import javax.media.j3d.Shape3D;
 import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransformGroup;
 import javax.media.j3d.TriangleArray;
-import javax.media.j3d.TriangleStripArray;
-import javax.vecmath.AxisAngle4d;
 import javax.vecmath.Point3f;
-import javax.vecmath.Point4f;
 import javax.vecmath.Vector3d;
 import javax.vecmath.Vector3f;
 
-import com.sun.j3d.utils.geometry.*;
-import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
-
-import de.tum.in.far.threedui.ex1.SphereObject;
-import de.tum.in.far.threedui.general.BlueAppearance;
-import de.tum.in.far.threedui.general.GreenAppearance;
-import de.tum.in.far.threedui.general.RedAppearance;
 import de.tum.in.far.threedui.general.TransformableObject;
 
 public class PathObject extends TransformableObject {
@@ -111,10 +102,9 @@ public class PathObject extends TransformableObject {
 		transGroup.addChild(markerGroup);
 	}
 	
-	public void attachEnemy(Enemy e)
+	public void attachToPath(Node n)
 	{
-		e.setPath(this.getWayPoints());
-		tPath.addChild(e.animation);
+		tPath.addChild(n);
 	}
 	
 	public void setPath(int x, int y)

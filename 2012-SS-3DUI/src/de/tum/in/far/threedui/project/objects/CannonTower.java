@@ -55,7 +55,7 @@ public class CannonTower extends TransformableObject{
 		case 4:
 			return Type.HOWITZER;
 		default:
-		return Type.GUN;
+		return null;
 				
 		}
 	}
@@ -84,9 +84,10 @@ public class CannonTower extends TransformableObject{
 			cannonTop = this.loader.getModelObject("Gun-Top");
 			cannonBase = this.loader.getModelObject("Gun-Base");
 			cannonBarrel = this.loader.getModelObject("Gun-Barrel");
+			barrelYOffset = 0.02f;
+
 			projectileLifetime = 50;
 			
-			barrelYOffset = 0.02f;
 		}
 		else if(type == Type.DOUBLEGUN)
 		{
@@ -94,6 +95,7 @@ public class CannonTower extends TransformableObject{
 			cannonBase = this.loader.getModelObject("DoubleGun-Base");
 			cannonBarrel = this.loader.getModelObject("DoubleGun-Barrel");
 			barrelYOffset = 0.016f;
+
 			projectileLifetime = 50;
 		}
 		else if(type == Type.PRECISION)
@@ -102,6 +104,7 @@ public class CannonTower extends TransformableObject{
 			cannonBase = this.loader.getModelObject("Precision-Base");
 			cannonBarrel = this.loader.getModelObject("Precision-Barrel");
 			barrelYOffset = 0.024f;
+			
 			projectileLifetime = 30;
 			projectileSpeed = 0.015f;
 			fireRate = 50;
@@ -115,7 +118,8 @@ public class CannonTower extends TransformableObject{
 			barrelYOffset = 0.013f;
 			
 			projectileLifetime = 100;
-			projectileSpeed = 0.005f;
+			projectileSpeed = 0.004f;
+			fireRate = 5;
 			
 		}
 		else if(type == Type.HOWITZER)

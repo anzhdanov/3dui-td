@@ -146,51 +146,49 @@ public class CannonTowerController extends Behavior{
 		
 		
 		//Collision
-		for(Projectile p:projectileList)
+//		System.out.println("Number of Projectiles: "+ projectileList.size());
+		for(Iterator<Projectile> iter_proj = projectileList.iterator(); iter_proj.hasNext(); )
 		{
+			Projectile p = iter_proj.next();
+
 			p.updateProjectile();
-			
-		//	System.out.println("NUmber of Particles: "+ projectileList.size());
 			
 			LinkedList<Enemy> enemyList = GameController.getInstance().enemyList;
 			
-			synchronized(enemyList) {
-			
-				for(Iterator<Enemy> i = enemyList.iterator(); i.hasNext(); )
+			for(Iterator<Enemy> iter_enemy = enemyList.iterator(); iter_enemy.hasNext(); )
+			{
+				Enemy e = iter_enemy.next();
+				Vector3f enemyPos = new Vector3f();
+				Transform3D transEnemy = new Transform3D();
+				
+				e.getTransformGroup().getLocalToVworld(transEnemy);
+				transEnemy.get(enemyPos);
+				
+				Vector3f particlePos = new Vector3f();
+				Transform3D transParticle = new Transform3D();
+				p.getGlobalCoords(transParticle);
+				transParticle.get(particlePos);
+				
+//				System.out.println("particle: " + particlePos);
+				
+				Vector3f distance = new Vector3f();
+				distance.sub(enemyPos,particlePos);
+				
+//				System.out.println(projectileList.indexOf(p) + " .. " + distance.length());
+				if(distance.length()<0.025f)
 				{
-					Enemy e = i.next();
-					Vector3f enemyPos = new Vector3f();
-					Transform3D transEnemy = new Transform3D();
+//					System.out.println("hit with Particle nr. " +projectileList.indexOf(p)+ " and " +e.name);
+					// Remove projectile
+					p.detach();
+					iter_proj.remove();
 					
-					e.getTransformGroup().getLocalToVworld(transEnemy);
-					transEnemy.get(enemyPos);
-					
-					Vector3f particlePos = new Vector3f();
-					Transform3D transParticle = new Transform3D();
-					p.getGlobalCoords(transParticle);
-					transParticle.get(particlePos);
-					
-					System.out.println("particle: " + particlePos);
-					
-					Vector3f distance = new Vector3f();
-					distance.sub(enemyPos,particlePos);
-					
-					System.out.println(projectileList.indexOf(p) + " .. " + distance.length());
-					if(distance.length()<0.025f)
-					{
-						System.out.println("hit with Particle nr. " +projectileList.indexOf(p)+ " and " +e.name);
-						
-					
-							//Remove enemy when hit;
-						e.animation.detach();
-						i.remove();
-//						GameController.getInstance().enemyList.remove(e);
+					// Damage enemy
+					if (e.damage()) {
+						iter_enemy.remove();
 					}
-					
-					
-					
-					
+
 				}
+				
 			}
 		}
 		
