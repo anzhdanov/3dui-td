@@ -72,5 +72,14 @@ public class Enemy extends TransformableObject {
 		}
 		return false;
 	}
+	
+	public void destroy()
+	{
+		this.animation.detach();
+	}
+
+	public boolean reachedEnd() {
+		return animation.isFinished();
+	}
 
 }

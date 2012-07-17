@@ -1,29 +1,34 @@
 package de.tum.in.far.threedui.project.gamelogic;
 
+import java.util.Enumeration;
+import java.util.Iterator;
 import java.util.LinkedList;
 
 import javax.media.j3d.Appearance;
+import javax.media.j3d.Behavior;
+import javax.media.j3d.BoundingSphere;
 import javax.media.j3d.BranchGroup;
-import javax.media.j3d.OrientedShape3D;
-import javax.media.j3d.QuadArray;
-import javax.media.j3d.Transform3D;
-import javax.media.j3d.TransformGroup;
 import javax.media.j3d.TransparencyAttributes;
-import javax.vecmath.Point3f;
-import javax.vecmath.Vector3f;
+import javax.media.j3d.WakeupCondition;
+import javax.media.j3d.WakeupCriterion;
+import javax.media.j3d.WakeupOnElapsedTime;
+import javax.media.j3d.WakeupOr;
+import javax.vecmath.Color3f;
 
 import de.tum.in.far.threedui.general.BlueAppearance;
 import de.tum.in.far.threedui.general.TransformableObject;
+import de.tum.in.far.threedui.project.EnemyAppearance;
 import de.tum.in.far.threedui.project.objects.Enemy;
 import de.tum.in.far.threedui.project.objects.PathObject;
 
-public class GameController extends TransformableObject{
+public class GameController extends TransformableObject {
 	
 	private static GameController instance;
 	public LinkedList<Enemy> enemyList;
 	public BranchGroup particleGroup;
 	public PathObject pathObject = null;
 	
+	private int lives;
 	
 	public static GameController getInstance()
 	{
@@ -43,14 +48,46 @@ public class GameController extends TransformableObject{
 		particleGroup.setCapability(BranchGroup.ALLOW_CHILDREN_WRITE);
 		particleGroup.setCapability(BranchGroup.ALLOW_LOCAL_TO_VWORLD_READ);
 		
+		lives = 20;
+		
+		this.addChild(new EnemyBehavior());
+	}
+	
+	private class EnemyBehavior extends Behavior {
 
-		Appearance app = new BlueAppearance();
-		TransparencyAttributes ta = new TransparencyAttributes();
-		ta.setTransparency(0.5f);
-		ta.setTransparencyMode (ta.BLENDED);
-		app.setTransparencyAttributes(ta);		
+		private WakeupCondition condition;
+		
+		public EnemyBehavior() {
+		}
+		
+		@Override
+		public void initialize() {
+			BoundingSphere bounds = new BoundingSphere();
+			bounds.setRadius(40.0);
+			setSchedulingBounds(bounds);
+			condition = new WakeupOr(new WakeupCriterion[]{new WakeupOnElapsedTime(20)});
+			wakeupOn(condition);
+			
+		}
+
+		@Override
+		public void processStimulus(Enumeration arg0) {
+//			System.out.println("process");
+			// TODO game over
+			for(Iterator<Enemy> iter_enemy = enemyList.iterator(); iter_enemy.hasNext(); ) {
+				Enemy e = iter_enemy.next();
+				if (e.reachedEnd()) {
+					System.out.println(e + " reached end!!");
+					lives--;
+					System.out.println("Remaining lives: " + lives);
+					e.destroy();
+					iter_enemy.remove();
+				}
+				
+			}
+			wakeupOn(condition);
+		}
 		
 	}
 	
-	
-	}
+}

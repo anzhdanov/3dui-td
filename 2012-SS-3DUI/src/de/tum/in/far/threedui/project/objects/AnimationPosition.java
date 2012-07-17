@@ -105,5 +105,9 @@ public class AnimationPosition extends BranchGroup {
 		return targetTransformGroup;
 
 	}
+
+	public boolean isFinished() {
+		return a.finished();
+	}
 	
 }
