@@ -20,7 +20,7 @@ public class CannonTower extends TransformableObject{
 	private CannonTowerController controller;
 	private float barrelYOffset = 0.02f;
 	private Type towerType;
-	private int fireRate = 5;
+	private int fireRate = 10;
 	private float turretAngle = 0;
 	private float barrelAngle = 0;
 	private float projectileLifetime;
@@ -102,8 +102,9 @@ public class CannonTower extends TransformableObject{
 			cannonBase = this.loader.getModelObject("Precision-Base");
 			cannonBarrel = this.loader.getModelObject("Precision-Barrel");
 			barrelYOffset = 0.024f;
-			projectileLifetime = 200;
-			projectileSpeed = 0.007f;
+			projectileLifetime = 30;
+			projectileSpeed = 0.015f;
+			fireRate = 50;
 			
 		}
 		else if(type == Type.GATLING)
